@@ -1,0 +1,10 @@
+.category-list {
+    padding: 0 0 0 40px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 480px) {
+    .category-list {
+        padding: 0 0 0 40px;
+    }
+}

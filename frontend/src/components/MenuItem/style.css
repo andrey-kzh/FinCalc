@@ -1,0 +1,46 @@
+.menu li {
+    display: block;
+    list-style: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .menu li {
+        width: 50%;
+    }
+}
+
+a.button {
+    border: 1px solid #ffffff;
+    background-color: #9a9797;
+    color: #ffffff;
+    font-size: 1.2rem;
+    height: 25px;
+    width: 180px;
+    cursor: pointer;
+    text-align: center;
+    padding: 2px 0 0 0;
+    box-sizing: border-box;
+    display: block;
+    text-decoration: none;
+}
+
+a.button,
+a.button:active,
+a.button:focus {
+    outline: none;
+}
+
+a.button_active,
+a.button:hover {
+    background-color: #cdcdcd;
+}
+
+a.button_period {
+    margin: 0 2px 0 0;
+}
+
+@media screen and (max-width: 1024px) {
+    a.button_period {
+        width: 100%;
+    }
+}

@@ -1,0 +1,35 @@
+.minus,
+.plus {
+    width: 24px;
+    height: 24px;
+    background: #000000;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    display: block;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.minus:hover,
+.plus:hover {
+    background: #999999;
+}
+
+.plus:after,
+.plus:before,
+.minus:before {
+    content: '';
+    display: block;
+    background-color: #ffffff;
+    position: absolute;
+    height: 4px;
+    width: 16px;
+    left: 4px;
+    top: 10px;
+}
+
+.plus:after {
+    transform: rotate(90deg);
+}

@@ -1,0 +1,8 @@
+
+code: 'l01', message: 'Empty login/password'
+code: 'l02', message: 'User not found'
+code: 'l03', message: 'Access token expires'
+code: 'l04', message: 'Wrong access token'
+code: 'l05', mes: 'Refresh token not found'
+code: 'l06', mes: 'Session not found'
+code: 'l07', mes: 'Undefined error'

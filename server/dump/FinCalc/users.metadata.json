@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"FinCalc.users"},{"v":{"$numberInt":"2"},"unique":true,"key":{"login":{"$numberInt":"1"}},"name":"login_1","ns":"FinCalc.users","background":true}],"uuid":"2e2d05948eaa49a7a6a52ee31126826d"}

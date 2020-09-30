@@ -1,0 +1,37 @@
+.user {
+    display: flex;
+    margin: 0 0 0 5%;
+}
+
+.user-name {
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    font-size: 1.1rem;
+    display: block;
+    height: 24px;
+    background-size: 24px 24px;
+    background-position: left;
+    background-repeat: no-repeat;
+    padding: 3px 0 0 30px;
+    box-sizing: border-box;
+    background-image: url("img/user-icon.svg");
+    margin: 0 20px 0 0;
+}
+
+.user-logout {
+    background: transparent;
+    margin: 0;
+    border: 0;
+    font-size: 1.1rem;
+    display: block;
+    color: #4068ea;
+    padding: 0 0 0 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.user-logout:hover {
+    color: #9a9797;
+}
+

@@ -1,0 +1,20 @@
+a.button-setup {
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    font-size: 1.1rem;
+    display: block;
+    height: 24px;
+    background-size: 24px 24px;
+    background-position: left;
+    background-repeat: no-repeat;
+    padding: 3px 0 0 30px;
+    box-sizing: border-box;
+    background-image: url("img/setup-icon.svg");
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a.button-setup:hover {
+    color: #9a9797;
+}

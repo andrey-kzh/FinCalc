@@ -1,0 +1,27 @@
+@charset "UTF-8";
+@font-face {
+    font-family: "Pragmatica_";
+    src: url("fonts/prg55.eot?") format("eot");
+    src: url("fonts/prg55.woff") format("woff");
+    src: url("fonts/prg55.ttf") format("truetype");
+}
+
+html, body {
+    font-family: Pragmatica_;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.max-width {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 480px) {
+    .max-width {
+        padding: 0 10px;
+    }
+}
