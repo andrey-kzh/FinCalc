@@ -9,6 +9,7 @@ import {
 
 import {store} from './store';
 import Home from './pages/home';
+import Setup from './pages/setup';
 import Login from './pages/login';
 import Page404 from './pages/404';
 import PrivateRoute from './components/PrivateRoute'
@@ -26,6 +27,9 @@ class App extends React.Component {
                         <Switch>
                             <PrivateRoute exact path="/">
                                 <Home/>
+                            </PrivateRoute>
+                            <PrivateRoute exact path="/setup">
+                                <Setup/>
                             </PrivateRoute>
                             <Route path="/login/" component={Login}/>
                             <Route path="*" component={Page404}/>
