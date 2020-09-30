@@ -1,9 +1,9 @@
-.detals__block {
+.details__block {
     display: block;
 }
 
 @media screen and (max-width: 768px) {
-    .detals__block_hide {
+    .details__block_hide {
         display: none;
     }
 }

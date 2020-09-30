@@ -1,4 +1,4 @@
-.menu__detals {
+.menu__details {
     justify-content: flex-start;
     padding: 0;
     margin: 0;
@@ -7,27 +7,27 @@
 }
 
 @media screen and (max-width: 768px) {
-    .menu__detals {
+    .menu__details {
         display: flex;
     }
 }
 
-.menu__detals li {
+.menu__details li {
     display: block;
     list-style: none;
 }
 
 @media screen and (max-width: 1024px) {
-    .menu__detals li {
+    .menu__details li {
         width: 50%;
     }
 }
 
-.menu__detals_search {
+.menu__details_search {
     margin: 50px 0 0 0;
 }
 
-.button_detals {
+.button_details {
     width: 100%;
     height: 30px;
 }
