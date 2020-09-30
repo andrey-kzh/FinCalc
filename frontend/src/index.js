@@ -32,6 +32,9 @@ class App extends React.Component {
                                 <Setup/>
                             </PrivateRoute>
                             <Route path="/login/" component={Login}/>
+                            <PrivateRoute exact path="/:period">
+                                <Home/>
+                            </PrivateRoute>
                             <Route path="*" component={Page404}/>
                         </Switch>
                     </Router>

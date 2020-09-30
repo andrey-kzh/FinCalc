@@ -10,7 +10,7 @@ export default class MenuItem extends React.PureComponent {
     render() {
         return (
             <li>
-                <a href={`/home/${this.props.link}`} className={`button button_period`}>{this.props.title}</a>
+                <a href={`/${this.props.link}`} className={`button button_period`}>{this.props.title}</a>
             </li>
         )
     }

@@ -10,6 +10,7 @@ export default class PrivateRouteComponent extends React.PureComponent {
     constructor(props) {
         super(props)
         this.children = props.children
+        this.urlParams = props.computedMatch.params
         this.location = props.location
     }
 
@@ -27,7 +28,7 @@ export default class PrivateRouteComponent extends React.PureComponent {
             <Route
                 render={() =>
                     (this.props.user.isLogin) //подтверждение авторизации
-                        ? (this.children)
+                        ? (React.cloneElement(this.children, {urlParams: this.urlParams}))
                         : (<Redirect
                             to={{
                                 pathname: "/login",
