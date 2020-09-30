@@ -10,7 +10,7 @@ export default class CategorysComponent extends React.PureComponent {
 
     returnClassName() {
         if(this.props.type !== this.props.toggleCategory) {
-           return 'detals__block_hide'
+           return 'details__block_hide'
         }
         return ''
     }
@@ -32,7 +32,7 @@ export default class CategorysComponent extends React.PureComponent {
 
     render() {
         return (
-            <div className={`detals__block ${this.returnClassName()}`}>
+            <div className={`details__block ${this.returnClassName()}`}>
                 {this.renderItems()}
             </div>
         )
