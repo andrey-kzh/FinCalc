@@ -49,7 +49,6 @@ export const initialState = {
     }
 }
 
-//сопоставляет редьюсер с ключем состояния за который они отвечают
 const reducer = combineReducers({
     user: userReducer,
 
@@ -61,6 +60,5 @@ const reducer = combineReducers({
 })
 
 
-//Создаем хранилище
 export const store = createStore(reducer, initialState, applyMiddleware(sagaMiddleware))
 sagaMiddleware.run(sagas)
