@@ -11,6 +11,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 export const initialState = {
     user: {
+        id: null,
         name: null,
         isLogin: null,
     },

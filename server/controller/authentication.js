@@ -5,7 +5,6 @@ const Session = require('../model/Sessions');
 module.exports.login = async function login(ctx, next) {
 
     if (!ctx.request.body.login) {
-        //ctx.throw(400, 'Login not found');
         ctx.status = 400;
         ctx.body = {error: {code: 'l01', mes: 'Empty login/password'}};
         return;
@@ -35,7 +34,7 @@ module.exports.login = async function login(ctx, next) {
             const tokens = await session.generateAndSetTokens();
             await session.save();
 
-            ctx.body = {userName: user.name, isLogin: true, tokens: tokens};
+            ctx.body = {id: user.id, userName: user.name, isLogin: true, tokens: tokens};
 
         } catch (e) {
             console.log(e.message);
@@ -79,7 +78,7 @@ module.exports.getUserDataBySession = async function getUserDataBySession(ctx, n
             return
         }
         ctx.status = 200;
-        ctx.body = {userName: ctx.user.name, isLogin: true};
+        ctx.body = {id: ctx.user.id, userName: ctx.user.name, isLogin: true};
 
     } catch (e) {
         console.log(e.message)
