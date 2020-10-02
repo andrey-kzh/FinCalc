@@ -20,18 +20,18 @@ export default class ToggleCategoryComponent extends React.PureComponent {
         console.log(this.props.toggleCategory)
 
         return (
-            <ul className={`menu__detals menu__detals_search`}>
+            <ul className={`menu__details menu__details_search`}>
                 <li>
                     <SubmitButton
                         callback={() => this.props.toggle('expense')}
-                        className={`button_detals ${this.returnClassName('expense')}`}>
+                        className={`button_details ${this.returnClassName('expense')}`}>
                         Расходы
                     </SubmitButton>
                 </li>
                 <li>
                     <SubmitButton
                         callback={() => this.props.toggle('income')}
-                        className={`button_detals ${this.returnClassName('income')}`}>
+                        className={`button_details ${this.returnClassName('income')}`}>
                         Доходы
                     </SubmitButton>
                 </li>
