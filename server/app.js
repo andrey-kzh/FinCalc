@@ -25,11 +25,11 @@ router.post('/auth/refresh', refreshTokens);
 router.get('/auth/user', getUserDataBySession);
 
 router.get('/categorys', mustBeAuthenticated, getCategorys);
-router.post('/categorys', addCategory);
-router.put('/categorys', updCategory);
+router.post('/categorys', mustBeAuthenticated, addCategory);
+router.put('/categorys', mustBeAuthenticated, updCategory);
 
-router.post('/lists', addLists);
-router.delete('/lists', delLists);
+router.post('/lists', mustBeAuthenticated, addLists);
+router.delete('/lists', mustBeAuthenticated, delLists);
 
 app.use(router.routes());
 

@@ -15,6 +15,7 @@ export default class Api {
         this.requestWithAccessToken = this.requestWithAccessToken.bind(this);
         this.refreshTokens = this.refreshTokens.bind(this);
         this.getAuthDataBySession = this.getAuthDataBySession.bind(this);
+        this.addCategoryRequest = this.addCategoryRequest.bind(this);
     }
 
 
@@ -94,4 +95,30 @@ export default class Api {
             console.log(e.message)
         }
     }
+
+
+    async addCategoryRequest(category) {
+
+        const url = `/categorys`;
+        const options = {
+            method: "POST",
+            body: JSON.stringify({
+                title: category.title,
+                userId: category.userId,
+                type: category.type
+            }),
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            console.log(response)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+
+
+    }
+
 }

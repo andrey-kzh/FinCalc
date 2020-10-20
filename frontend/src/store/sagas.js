@@ -21,7 +21,6 @@ function* fetchLogin(action) {
 
 function* fetchAuth() {
     try {
-        console.log('auth')
         const user = yield call(api.getAuthDataBySession)
         if (!user.error) {
             yield put({type: "LOGIN", payload: user})
@@ -45,7 +44,6 @@ function* fetchLogout() {
 
 
 function* refreshTokens(nextAction) {
-    console.log('refresh tokens')
     const response = yield call(api.refreshTokens)
     if (response.error) {
         yield put({type: "LOGIN", payload: {userName: null, isLogin: false}})
@@ -56,11 +54,18 @@ function* refreshTokens(nextAction) {
 }
 
 
+function* addCategory(action) {
+    const categoryId = yield call(api.addCategoryRequest, action.payload)
+    console.log(categoryId)
+}
+
+
 function* sagas() {
     yield takeEvery("LOGIN_REQUEST", fetchLogin);
     yield takeEvery("AUTH_REQUEST", fetchAuth);
     yield takeEvery("REFRESH_TOKENS", refreshTokens);
     yield takeEvery("LOGOUT_REQUEST", fetchLogout);
+    yield takeEvery("ADD_CATEGORY", addCategory);
 }
 
 export default sagas;

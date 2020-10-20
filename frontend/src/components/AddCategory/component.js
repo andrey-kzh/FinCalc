@@ -10,8 +10,9 @@ export default class AddCategoryComponent extends React.PureComponent {
         super(props)
 
         this.state = {
-            categoryType: '',
-            title: ''
+            type: 'expense',
+            title: '',
+            userId: props.user.id
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -32,7 +33,8 @@ export default class AddCategoryComponent extends React.PureComponent {
                     id={'radio-expense'}
                     name={'category-type'}
                     value={'expense'}
-                    callback={(e) => this.handleChange(e, 'categoryType')}>
+                    defaultChecked={true}
+                    callback={(e) => this.handleChange(e, 'type')}>
                     Расход
                 </RadioButton>
 
@@ -41,7 +43,7 @@ export default class AddCategoryComponent extends React.PureComponent {
                     id={'radio-income'}
                     name={'category-type'}
                     value={'income'}
-                    callback={(e) => this.handleChange(e, 'categoryType')}>
+                    callback={(e) => this.handleChange(e, 'type')}>
                     Доход
                 </RadioButton>
 
@@ -54,13 +56,11 @@ export default class AddCategoryComponent extends React.PureComponent {
 
                 <SubmitButton
                     className={'button_setup-form'}
-                    callback={() => console.log(1)}>
+                    callback={() => this.props.addCategory(this.state)}>
                     Добавить
                 </SubmitButton>
 
             </form>
         )
-
     }
-
 }

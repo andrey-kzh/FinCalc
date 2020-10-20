@@ -27,3 +27,9 @@ export const logout = () => {
         {type: "LOGOUT_REQUEST", payload: {}}
     )
 }
+
+export const addCategory = (data) => {
+    return (
+        {type: "ADD_CATEGORY", payload: data}
+    )
+}
