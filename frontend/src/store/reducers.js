@@ -18,3 +18,14 @@ export function userReducer(prevState = initialState, action) {
     }
     return prevState
 }
+
+
+export function toogleCategoryReducer(prevState = initialState, action) {
+
+    switch (action.type) {
+        case "TOGGLE_CATEGORY": {
+            return action.payload.categoryType
+        }
+    }
+    return prevState
+}
