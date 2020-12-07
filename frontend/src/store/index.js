@@ -4,6 +4,7 @@ import sagas from './sagas'
 
 import {
     returnStateReducer,
+    toogleCategoryReducer,
     userReducer,
 } from "./reducers"
 
@@ -15,7 +16,7 @@ export const initialState = {
         name: null,
         isLogin: null,
     },
-    toggleCategory: 'income',
+    toggleCategory: 'expense',
     menu: [
         {title: 'Этот месяц', link: 'month'},
         {title: 'Прошлый месяц', link: 'last-month'},
@@ -57,7 +58,7 @@ const reducer = combineReducers({
     charts: returnStateReducer,
     categorys: returnStateReducer,
     lists: returnStateReducer,
-    toggleCategory: returnStateReducer,
+    toggleCategory: toogleCategoryReducer,
 })
 
 

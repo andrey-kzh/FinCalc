@@ -17,8 +17,6 @@ export default class ToggleCategoryComponent extends React.PureComponent {
 
     render() {
 
-        console.log(this.props.toggleCategory)
-
         return (
             <ul className={`menu__details menu__details_search`}>
                 <li>

@@ -21,7 +21,6 @@ function* fetchLogin(action) {
 
 function* fetchAuth() {
     try {
-        console.log('auth')
         const user = yield call(api.getAuthDataBySession)
         if (!user.error) {
             yield put({type: "LOGIN", payload: user})
