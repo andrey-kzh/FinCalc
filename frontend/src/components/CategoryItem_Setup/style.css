@@ -1,0 +1,29 @@
+.category__setup {
+    margin: 0 0 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+}
+
+.category-setup__item {
+    margin: 0 10px 0 0;
+    padding: 3px 10px 3px 10px;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    min-height: 27px;
+    background-color: #ededed;
+}
+
+.button_hide {
+    width: 100px;
+    height: 33px;
+    border: 0;
+}
+
+@media screen and (max-width: 480px) {
+    .button_hide {
+        height: 27px;
+    }
+}

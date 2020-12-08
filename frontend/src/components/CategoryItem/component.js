@@ -5,7 +5,7 @@ import PlusButton from '../PlusButton'
 import AddForm from '../AddForm'
 import List from '../List'
 
-export default class CategorysItem extends React.PureComponent {
+export default class CategoryItem extends React.PureComponent {
 
     constructor(props) {
         super(props)

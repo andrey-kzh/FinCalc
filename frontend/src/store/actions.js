@@ -33,3 +33,9 @@ export const addCategory = (data) => {
         {type: "ADD_CATEGORY", payload: data}
     )
 }
+
+export const hideCategory = (data) => {
+    return (
+        {type: "HIDE_CATEGORY", payload: data}
+    )
+}
