@@ -1,0 +1,7 @@
+.radio-button {
+    display: none;
+}
+
+.radio-button:checked + .radio-button-lable {
+    background-color: #cdcdcd;
+}

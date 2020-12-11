@@ -4,6 +4,7 @@ import sagas from './sagas'
 
 import {
     returnStateReducer,
+    toogleCategoryReducer,
     userReducer,
 } from "./reducers"
 
@@ -11,10 +12,11 @@ const sagaMiddleware = createSagaMiddleware()
 
 export const initialState = {
     user: {
+        id: null,
         name: null,
         isLogin: null,
     },
-    toggleCategory: 'income',
+    toggleCategory: 'expense',
     menu: [
         {title: 'Этот месяц', link: 'month'},
         {title: 'Прошлый месяц', link: 'last-month'},
@@ -49,7 +51,6 @@ export const initialState = {
     }
 }
 
-//сопоставляет редьюсер с ключем состояния за который они отвечают
 const reducer = combineReducers({
     user: userReducer,
 
@@ -57,10 +58,9 @@ const reducer = combineReducers({
     charts: returnStateReducer,
     categorys: returnStateReducer,
     lists: returnStateReducer,
-    toggleCategory: returnStateReducer,
+    toggleCategory: toogleCategoryReducer,
 })
 
 
-//Создаем хранилище
 export const store = createStore(reducer, initialState, applyMiddleware(sagaMiddleware))
 sagaMiddleware.run(sagas)

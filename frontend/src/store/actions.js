@@ -6,7 +6,7 @@ export const getPosts = (menu) => {
 
 export const toggleCategory = (categoryType) => {
     return (
-        {type: "TOGGLE_CATEGORY", payload: categoryType}
+        {type: "TOGGLE_CATEGORY", payload: {categoryType: categoryType}}
     )
 }
 
