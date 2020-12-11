@@ -7,7 +7,7 @@ export function returnStateReducer(prevState = initialState) {
 export function userReducer(prevState = initialState, action) {
 
     switch (action.type) {
-        case "LOGIN": {
+        case "LOGIN_STORE": {
             const user = {
                 id: action.payload.id,
                 name: action.payload.userName,
@@ -23,9 +23,21 @@ export function userReducer(prevState = initialState, action) {
 export function toogleCategoryReducer(prevState = initialState, action) {
 
     switch (action.type) {
-        case "TOGGLE_CATEGORY": {
+        case "TOGGLE_CATEGORY_STORE": {
             return action.payload.categoryType
         }
     }
     return prevState
+}
+
+
+export function categorysReducer(prevState = initialState, action) {
+
+    switch (action.type) {
+        case "UPD_CATEGORYS_STORE": {
+            return action.payload.categorys
+        }
+    }
+    return prevState
+
 }

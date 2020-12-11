@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {loginRequest} from '../../store/actions'
+import {loginRequestAction} from '../../store/actions'
 import LoginFormComponent from './component'
 
 
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loginRequest: (data) => dispatch(loginRequest(data))
+        loginRequest: (data) => dispatch(loginRequestAction(data))
     };
 };
 

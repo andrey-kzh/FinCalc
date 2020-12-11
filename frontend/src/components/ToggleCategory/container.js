@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {toggleCategory} from '../../store/actions'
+import {toggleCategoryAction} from '../../store/actions'
 import ToggleCategoryComponent from './component'
 
 
@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        toggle: (categoryType) => dispatch(toggleCategory(categoryType))
+        toggle: (categoryType) => dispatch(toggleCategoryAction(categoryType))
     };
 };
 

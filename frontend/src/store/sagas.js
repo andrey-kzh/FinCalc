@@ -2,6 +2,13 @@ import {call, put, takeEvery} from 'redux-saga/effects'
 import Api from '../api'
 import {saveTokensToStorage} from '../utils/tokens'
 
+import {
+    updStoreCategorysAction,
+    loginUserAction,
+    refreshTokensAction,
+    authRequestAction,
+} from '../store/actions'
+
 const api = new Api();
 
 
@@ -10,7 +17,7 @@ function* fetchLogin(action) {
         const user = yield call(api.loginRequest, action.payload);
         if (!user.error) {
             if (user.tokens) yield call(saveTokensToStorage, user.tokens);
-            yield put({type: "LOGIN", payload: user}) //вызываем редьюсер
+            yield put(loginUserAction(user)) //вызываем редьюсер
         } else {
             console.log(user.error)
         }
@@ -19,16 +26,17 @@ function* fetchLogin(action) {
     }
 }
 
+
 function* fetchAuth() {
     try {
         const user = yield call(api.getAuthDataBySession)
         if (!user.error) {
-            yield put({type: "LOGIN", payload: user})
+            yield put(loginUserAction(user))
         } else {
             if (user.error.code === 'l03') { //Access token expires
-                yield put({type: "REFRESH_TOKENS", payload: {type: "AUTH_REQUEST"}})
+                yield put(refreshTokensAction(authRequestAction()))
             } else {
-                yield put({type: "LOGIN", payload: {userName: null, isLogin: false}})
+                yield put(loginUserAction({userName: null, isLogin: false}))
             }
         }
 
@@ -43,10 +51,10 @@ function* fetchLogout() {
 }
 
 
-function* refreshTokens(nextAction) {
+function* fetchRefreshTokens(nextAction) {
     const response = yield call(api.refreshTokens)
     if (response.error) {
-        yield put({type: "LOGIN", payload: {userName: null, isLogin: false}})
+        yield put(loginUserAction({userName: null, isLogin: false}))
     } else {
         yield call(saveTokensToStorage, response.tokens)
         yield put(nextAction.payload)
@@ -54,18 +62,26 @@ function* refreshTokens(nextAction) {
 }
 
 
-function* addCategory(action) {
+function* fetchAddCategory(action) {
     const categoryId = yield call(api.addCategoryRequest, action.payload)
     console.log(categoryId)
+}
+
+
+function* fetchAllCategorys(action) {
+    const response = yield call(api.getAllCategorys, action.payload.userId)
+    yield put(updStoreCategorysAction(response.categories))
+
 }
 
 
 function* sagas() {
     yield takeEvery("LOGIN_REQUEST", fetchLogin);
     yield takeEvery("AUTH_REQUEST", fetchAuth);
-    yield takeEvery("REFRESH_TOKENS", refreshTokens);
+    yield takeEvery("REFRESH_TOKENS_REQUEST", fetchRefreshTokens);
     yield takeEvery("LOGOUT_REQUEST", fetchLogout);
-    yield takeEvery("ADD_CATEGORY", addCategory);
+    yield takeEvery("ADD_CATEGORY_REQUEST", fetchAddCategory);
+    yield takeEvery("GET_CATEGORYS_REQUEST", fetchAllCategorys);
 }
 
 export default sagas;

@@ -18,8 +18,6 @@ module.exports.getCategorys = async function getCategorys(ctx, next) {
 
 module.exports.addCategory = async function addCategory(ctx, next) {
 
-    console.log(ctx.request.body)
-
     try {
         const category = await Categorys.create({
             title: ctx.request.body.title,

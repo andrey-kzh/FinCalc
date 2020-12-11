@@ -9,6 +9,10 @@ export default class CategorysComponent extends React.PureComponent {
         super(props)
     }
 
+    componentDidMount() {
+        this.props.getAllCategorys(this.props.user.id);
+    }
+
     render() {
         return (
             [

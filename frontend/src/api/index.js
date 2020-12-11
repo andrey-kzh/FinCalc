@@ -16,6 +16,7 @@ export default class Api {
         this.refreshTokens = this.refreshTokens.bind(this);
         this.getAuthDataBySession = this.getAuthDataBySession.bind(this);
         this.addCategoryRequest = this.addCategoryRequest.bind(this);
+        this.getAllCategorys = this.getAllCategorys.bind(this);
     }
 
 
@@ -110,7 +111,6 @@ export default class Api {
         };
         try {
             const response = await this.requestWithAccessToken(url, options)
-            console.log(response)
             return response.json().then((data) => {
                 return data
             })
@@ -119,6 +119,22 @@ export default class Api {
         }
 
 
+    }
+
+    async getAllCategorys(userId) {
+
+        const url = `/categorys?userId=${userId}`;
+        const options = {
+            method: "GET",
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
     }
 
 }

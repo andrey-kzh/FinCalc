@@ -6,6 +6,7 @@ import {
     returnStateReducer,
     toogleCategoryReducer,
     userReducer,
+    categorysReducer,
 } from "./reducers"
 
 const sagaMiddleware = createSagaMiddleware()
@@ -56,7 +57,7 @@ const reducer = combineReducers({
 
     menu: returnStateReducer,
     charts: returnStateReducer,
-    categorys: returnStateReducer,
+    categorys: categorysReducer,
     lists: returnStateReducer,
     toggleCategory: toogleCategoryReducer,
 })

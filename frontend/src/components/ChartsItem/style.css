@@ -1,5 +1,5 @@
 .chart {
-    padding: 0 0 40px 0;
+    padding: 0 0 10px 0;
     box-sizing: border-box;
     position: relative;
     width: 100%;
@@ -7,6 +7,7 @@
 
 @media screen and (max-width: 480px) {
     .chart {
+        padding: 0 0 40px 0;
         position: relative;
         width: 25%;
         height: 100%;
