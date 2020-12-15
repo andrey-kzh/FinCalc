@@ -25,7 +25,8 @@ module.exports.addCategory = async function addCategory(ctx, next) {
             type: ctx.request.body.type,
             visible: true,
         });
-        ctx.body = {categoryId: category.id};
+
+        ctx.body = {category: [category].map(mapCategorys)};
     } catch (err) {
         ctx.throw(400, err.message);
     }

@@ -37,6 +37,9 @@ export function categorysReducer(prevState = initialState, action) {
         case "UPD_CATEGORYS_STORE": {
             return action.payload.categorys
         }
+        case "ADD_CATEGORY_STORE": {
+            return [...prevState, ...action.payload.category]
+        }
     }
     return prevState
 

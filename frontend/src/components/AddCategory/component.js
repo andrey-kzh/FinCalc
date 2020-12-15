@@ -16,14 +16,23 @@ export default class AddCategoryComponent extends React.PureComponent {
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.addCategoryAndResetState = this.addCategoryAndResetState.bind(this)
     }
 
     handleChange(e, val) {
         this.setState({[val]: e.target.value});
     }
 
-    render() {
+    addCategoryAndResetState(category) {
+        if (this.state.title !== '') {
+            this.props.addCategory(category)
+            this.setState({
+                title: '',
+            })
+        }
+    }
 
+    render() {
         return (
             <form className={`setup-form`}
                   onSubmit={(e) => e.preventDefault()}>
@@ -56,7 +65,7 @@ export default class AddCategoryComponent extends React.PureComponent {
 
                 <SubmitButton
                     className={'button_setup-form'}
-                    callback={() => this.props.addCategory(this.state)}>
+                    callback={() => this.addCategoryAndResetState(this.state)}>
                     Добавить
                 </SubmitButton>
 

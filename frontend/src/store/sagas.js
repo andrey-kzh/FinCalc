@@ -3,7 +3,8 @@ import Api from '../api'
 import {saveTokensToStorage} from '../utils/tokens'
 
 import {
-    updStoreCategorysAction,
+    updCategorysInStoreAction,
+    addCategoryInStoreAction,
     loginUserAction,
     refreshTokensAction,
     authRequestAction,
@@ -63,14 +64,15 @@ function* fetchRefreshTokens(nextAction) {
 
 
 function* fetchAddCategory(action) {
-    const categoryId = yield call(api.addCategoryRequest, action.payload)
-    console.log(categoryId)
+    const response = yield call(api.addCategoryRequest, action.payload)
+    yield put(addCategoryInStoreAction(response.category))
+
 }
 
 
 function* fetchAllCategorys(action) {
     const response = yield call(api.getAllCategorys, action.payload.userId)
-    yield put(updStoreCategorysAction(response.categories))
+    yield put(updCategorysInStoreAction(response.categories))
 
 }
 

@@ -52,8 +52,14 @@ export const hideCategoryAction = (categoryId) => {
     )
 }
 
-export const updStoreCategorysAction = (categorys) => {
+export const updCategorysInStoreAction = (categorys) => {
     return (
         {type: "UPD_CATEGORYS_STORE", payload: {categorys: categorys}}
+    )
+}
+
+export const addCategoryInStoreAction = (category) => {
+    return (
+        {type: "ADD_CATEGORY_STORE", payload: {category: category}}
     )
 }
