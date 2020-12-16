@@ -4,6 +4,7 @@ import {saveTokensToStorage} from '../utils/tokens'
 
 import {
     updCategorysInStoreAction,
+    updOneCategoryInStoreAction,
     addCategoryInStoreAction,
     loginUserAction,
     refreshTokensAction,
@@ -76,6 +77,12 @@ function* fetchAllCategorys(action) {
 
 }
 
+function* fetchUpdateCategory(action) {
+    const response = yield call(api.updCategoryRequest, action.payload.category)
+    yield put(updOneCategoryInStoreAction(response.category))
+
+}
+
 
 function* sagas() {
     yield takeEvery("LOGIN_REQUEST", fetchLogin);
@@ -84,6 +91,7 @@ function* sagas() {
     yield takeEvery("LOGOUT_REQUEST", fetchLogout);
     yield takeEvery("ADD_CATEGORY_REQUEST", fetchAddCategory);
     yield takeEvery("GET_CATEGORYS_REQUEST", fetchAllCategorys);
+    yield takeEvery("UPD_CATEGORY_REQUEST", fetchUpdateCategory);
 }
 
 export default sagas;

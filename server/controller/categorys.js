@@ -26,7 +26,7 @@ module.exports.addCategory = async function addCategory(ctx, next) {
             visible: true,
         });
 
-        ctx.body = {category: [category].map(mapCategorys)};
+        ctx.body = {category: [category].map(mapCategorys)[0]};
     } catch (err) {
         ctx.throw(400, err.message);
     }
@@ -35,11 +35,18 @@ module.exports.addCategory = async function addCategory(ctx, next) {
 module.exports.updCategory = async function updCategory(ctx, next) {
 
     try {
+        let updFields = {};
+        if ('visible' in ctx.request.body) updFields.visible = ctx.request.body.visible;
+        if ('title' in ctx.request.body) updFields.title = ctx.request.body.title;
+        if ('type' in ctx.request.body) updFields.type = ctx.request.body.type;
+
         const category = await Categorys.findByIdAndUpdate(
             ctx.request.body.id,
-            {visible: ctx.request.body.visible}
+            updFields,
+            {new: true} //option for return new object after update
         );
-        ctx.body = {categoryId: category.id};
+
+        ctx.body = {category: [category].map(mapCategorys)[0]};
     } catch (err) {
         ctx.throw(400, err.message);
     }

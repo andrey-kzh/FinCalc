@@ -16,6 +16,10 @@
     background-color: #ededed;
 }
 
+.category-setup__item_hidden {
+    opacity: 0.3;
+}
+
 .button_hide {
     width: 100px;
     height: 33px;

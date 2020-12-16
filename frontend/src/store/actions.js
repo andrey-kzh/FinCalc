@@ -42,13 +42,13 @@ export const getAllCategorysAction = (userId) => {
 
 export const toggleCategoryAction = (categoryType) => {
     return (
-        {type: "TOGGLE_CATEGORY_STORE", payload: {categoryType: categoryType}}
+        {type: "TOGGLE_CATEGORYS_TYPE_STORE", payload: {categoryType: categoryType}}
     )
 }
 
-export const hideCategoryAction = (categoryId) => {
+export const updCategoryAction = (category) => {
     return (
-        {type: "HIDE_CATEGORY_REQUEST", payload: {categoryId: categoryId}}
+        {type: "UPD_CATEGORY_REQUEST", payload: {category: category}}
     )
 }
 
@@ -60,6 +60,12 @@ export const updCategorysInStoreAction = (categorys) => {
 
 export const addCategoryInStoreAction = (category) => {
     return (
-        {type: "ADD_CATEGORY_STORE", payload: {category: category}}
+        {type: "ADD_NEW_CATEGORY_STORE", payload: {category: category}}
+    )
+}
+
+export const updOneCategoryInStoreAction = (category) => {
+    return (
+        {type: "UPD_ONE_CATEGORY_STORE", payload: {category: category}}
     )
 }

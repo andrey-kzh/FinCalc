@@ -24,8 +24,8 @@ export default class CategorySetupComponent extends React.PureComponent {
                     key={categoryItem.id}
                     id={categoryItem.id}
                     title={categoryItem.title}
-                    sum={categoryItem.sum}
                     type={categoryItem.type}
+                    visible={categoryItem.visible}
                 />
             }
         })

@@ -17,6 +17,7 @@ export default class Api {
         this.getAuthDataBySession = this.getAuthDataBySession.bind(this);
         this.addCategoryRequest = this.addCategoryRequest.bind(this);
         this.getAllCategorys = this.getAllCategorys.bind(this);
+        this.updCategoryRequest = this.updCategoryRequest.bind(this);
     }
 
 
@@ -117,9 +118,26 @@ export default class Api {
         } catch (e) {
             console.log(e.message)
         }
-
-
     }
+
+
+    async updCategoryRequest(category) {
+
+        const url = `/categorys`;
+        const options = {
+            method: "PUT",
+            body: JSON.stringify(category),
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
 
     async getAllCategorys(userId) {
 

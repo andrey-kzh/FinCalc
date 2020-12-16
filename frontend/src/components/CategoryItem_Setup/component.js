@@ -8,19 +8,27 @@ export default class CategoryItemSetupComponent extends React.PureComponent {
         super(props)
     }
 
+    toggleVisibleAndUpdate() {
+        const category = {
+            id: this.props.id,
+            visible: !this.props.visible
+        }
+        this.props.updCategory(category)
+    }
+
     render() {
         return (
             <div className="category__setup">
-                <div className="category-setup__item">
+                <div className={`category-setup__item ${!this.props.visible && `category-setup__item_hidden`}`}>
                     <div className="category-setup__title">
                         {this.props.title}
                     </div>
                 </div>
 
                 <SubmitButton
-                    callback={() => this.props.hideCategory(this.props.id)}
+                    callback={() => this.toggleVisibleAndUpdate()}
                     className={`button button_hide`}>
-                    Скрыть
+                    {this.props.visible ? `Скрыть` : `Показать`}
                 </SubmitButton>
             </div>
         )
