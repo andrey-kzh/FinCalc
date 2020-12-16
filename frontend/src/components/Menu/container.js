@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getPosts} from '../../store/actions'
 import MenuComponent from './component'
 
 
@@ -12,9 +11,7 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = dispatch => {
-    return {
-        getPosts: (menu) => dispatch(getPosts(menu))
-    };
+    return {};
 };
 
 export const Menu = connect(mapStateToProps, mapDispatchToProps)(MenuComponent);

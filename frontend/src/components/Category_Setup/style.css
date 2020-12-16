@@ -1,0 +1,9 @@
+.details-setup__block {
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .details-setup__block_hide {
+        display: none;
+    }
+}

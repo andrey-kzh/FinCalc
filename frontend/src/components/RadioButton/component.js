@@ -5,6 +5,9 @@ export default class RadioButton extends React.PureComponent {
 
     constructor(props) {
         super(props)
+
+        this.defaultChecked = this.props.defaultChecked || false
+
     }
 
     render() {
@@ -16,6 +19,7 @@ export default class RadioButton extends React.PureComponent {
                        id={this.props.id}
                        name={this.props.name}
                        value={this.props.value}
+                       defaultChecked={this.defaultChecked}
                        onClick={this.props.callback}/>,
 
                 <label key={'rb02'}

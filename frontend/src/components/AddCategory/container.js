@@ -1,19 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getPosts} from '../../store/actions'
+import {addCategoryAction} from '../../store/actions'
 import AddCategoryComponent from './component'
 
 
 const mapStateToProps = state => {
     return {
-        menu: state.menu
+        user: state.user
     };
 };
 
 
 const mapDispatchToProps = dispatch => {
     return {
-        getPosts: (menu) => dispatch(getPosts(menu))
+        addCategory: (category) => dispatch(addCategoryAction(category))
     };
 };
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import UserLogoutLinkComponent from './component'
-import {logout} from "../../store/actions";
+import {logoutAction} from "../../store/actions";
 
 
 const mapStateToProps = state => {
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch(logout())
+        logout: () => dispatch(logoutAction())
     };
 };
 

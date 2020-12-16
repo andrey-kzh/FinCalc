@@ -25,11 +25,6 @@ export default class MenuComponent extends React.PureComponent {
                     {this.renderItems()}
                 </ul>
             </nav>
-            /*
-            <div onClick={() => this.props.getPosts(this.props.menu)}>
-                {this.props.menu}
-            </div>
-             */
         )
     }
 

@@ -1,32 +1,15 @@
 const Categorys = require('../model/Categorys');
-const mapCategory = require('../mappers/categorys');
+const {mapCategorys} = require('../mappers/categorys');
 
 module.exports.getCategorys = async function getCategorys(ctx, next) {
 
     if (!ctx.request.query.userId) {
         ctx.throw(400, 'userId parameter not found');
     }
-    if (!ctx.request.query.dateMin) {
-        ctx.throw(400, 'dateMin parameter not found');
-    }
-    if (!ctx.request.query.dateMax) {
-        ctx.throw(400, 'dateMax parameter not found');
-    }
 
     try {
         const categorys = await Categorys.find({userId: ctx.request.query.userId})
-        .populate({
-                path: 'categoryList', //виртуал в моделе
-                match: {
-                    date: {
-                        $gte: ctx.request.query.dateMin,
-                        $lte: ctx.request.query.dateMax,
-                    },
-                },
-                select: 'title sum date'
-            });
-
-        ctx.body = {categories: categorys.map(mapCategory)};
+        ctx.body = {categories: categorys.map(mapCategorys)};
 
     } catch (err) {
         ctx.throw(400, err.message);
@@ -42,7 +25,8 @@ module.exports.addCategory = async function addCategory(ctx, next) {
             type: ctx.request.body.type,
             visible: true,
         });
-        ctx.body = {categoryId: category.id};
+
+        ctx.body = {category: [category].map(mapCategorys)[0]};
     } catch (err) {
         ctx.throw(400, err.message);
     }
@@ -51,11 +35,18 @@ module.exports.addCategory = async function addCategory(ctx, next) {
 module.exports.updCategory = async function updCategory(ctx, next) {
 
     try {
+        let updFields = {};
+        if ('visible' in ctx.request.body) updFields.visible = ctx.request.body.visible;
+        if ('title' in ctx.request.body) updFields.title = ctx.request.body.title;
+        if ('type' in ctx.request.body) updFields.type = ctx.request.body.type;
+
         const category = await Categorys.findByIdAndUpdate(
             ctx.request.body.id,
-            {visible: ctx.request.body.visible}
+            updFields,
+            {new: true} //option for return new object after update
         );
-        ctx.body = {categoryId: category.id};
+
+        ctx.body = {category: [category].map(mapCategorys)[0]};
     } catch (err) {
         ctx.throw(400, err.message);
     }

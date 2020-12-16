@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PrivateRouteComponent from './component'
-import {authRequest} from "../../store/actions";
+import {authRequestAction} from "../../store/actions";
 
 
 const mapStateToProps = state => {
@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        authRequest: () => dispatch(authRequest())
+        authRequest: () => dispatch(authRequestAction())
     };
 };
 

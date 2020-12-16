@@ -10,19 +10,29 @@ export default class AddCategoryComponent extends React.PureComponent {
         super(props)
 
         this.state = {
-            categoryType: '',
-            title: ''
+            type: 'expense',
+            title: '',
+            userId: props.user.id
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.addCategoryAndResetState = this.addCategoryAndResetState.bind(this)
     }
 
     handleChange(e, val) {
         this.setState({[val]: e.target.value});
     }
 
-    render() {
+    addCategoryAndResetState(category) {
+        if (this.state.title !== '') {
+            this.props.addCategory(category)
+            this.setState({
+                title: '',
+            })
+        }
+    }
 
+    render() {
         return (
             <form className={`setup-form`}
                   onSubmit={(e) => e.preventDefault()}>
@@ -32,7 +42,8 @@ export default class AddCategoryComponent extends React.PureComponent {
                     id={'radio-expense'}
                     name={'category-type'}
                     value={'expense'}
-                    callback={(e) => this.handleChange(e, 'categoryType')}>
+                    defaultChecked={true}
+                    callback={(e) => this.handleChange(e, 'type')}>
                     Расход
                 </RadioButton>
 
@@ -41,7 +52,7 @@ export default class AddCategoryComponent extends React.PureComponent {
                     id={'radio-income'}
                     name={'category-type'}
                     value={'income'}
-                    callback={(e) => this.handleChange(e, 'categoryType')}>
+                    callback={(e) => this.handleChange(e, 'type')}>
                     Доход
                 </RadioButton>
 
@@ -54,13 +65,11 @@ export default class AddCategoryComponent extends React.PureComponent {
 
                 <SubmitButton
                     className={'button_setup-form'}
-                    callback={() => console.log(1)}>
+                    callback={() => this.addCategoryAndResetState(this.state)}>
                     Добавить
                 </SubmitButton>
 
             </form>
         )
-
     }
-
 }

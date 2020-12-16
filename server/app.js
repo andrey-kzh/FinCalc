@@ -3,7 +3,7 @@ const Router = require('koa-router');
 const cors = require('@koa/cors');
 
 const {getCategorys, addCategory, updCategory} = require('./controller/categorys');
-const {addLists, delLists} = require('./controller/lists');
+const {getLists, addLists, delLists} = require('./controller/lists');
 const {registration} = require('./controller/registration');
 const {login, logout, getUserDataBySession, refreshTokens} = require('./controller/authentication');
 const {authorization} = require('./controller/authorization');
@@ -25,11 +25,12 @@ router.post('/auth/refresh', refreshTokens);
 router.get('/auth/user', getUserDataBySession);
 
 router.get('/categorys', mustBeAuthenticated, getCategorys);
-router.post('/categorys', addCategory);
-router.put('/categorys', updCategory);
+router.post('/categorys', mustBeAuthenticated, addCategory);
+router.put('/categorys', mustBeAuthenticated, updCategory);
 
-router.post('/lists', addLists);
-router.delete('/lists', delLists);
+router.get('/lists', mustBeAuthenticated, getLists);
+router.post('/lists', mustBeAuthenticated, addLists);
+router.delete('/lists', mustBeAuthenticated, delLists);
 
 app.use(router.routes());
 
