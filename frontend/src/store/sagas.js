@@ -1,6 +1,7 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import Api from '../api'
 import {saveTokensToStorage} from '../utils/tokens'
+import {normalizeLists} from "../utils/normalizeLists";
 
 import {
     updCategorysInStoreAction,
@@ -83,6 +84,13 @@ function* fetchUpdateCategory(action) {
 
 }
 
+function* fetchAllListsWithCategorys(action) {
+    const response = yield call(api.getAllListsWithCategorys, action.payload.userIdAndDateRange)
+    normalizeLists(response.categories)
+    //yield put(updOneCategoryInStoreAction(response.category))
+
+}
+
 
 function* sagas() {
     yield takeEvery("LOGIN_REQUEST", fetchLogin);
@@ -92,6 +100,7 @@ function* sagas() {
     yield takeEvery("ADD_CATEGORY_REQUEST", fetchAddCategory);
     yield takeEvery("GET_CATEGORYS_REQUEST", fetchAllCategorys);
     yield takeEvery("UPD_CATEGORY_REQUEST", fetchUpdateCategory);
+    yield takeEvery("GET_LISTS_REQUEST", fetchAllListsWithCategorys);
 }
 
 export default sagas;

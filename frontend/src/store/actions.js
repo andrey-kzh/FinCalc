@@ -40,6 +40,12 @@ export const getAllCategorysAction = (userId) => {
     )
 }
 
+export const getAllListsWithCategorysAction = (obj) => {
+    return (
+        {type: "GET_LISTS_REQUEST", payload: {userIdAndDateRange: obj}}
+    )
+}
+
 export const toggleCategoryAction = (categoryType) => {
     return (
         {type: "TOGGLE_CATEGORYS_TYPE_STORE", payload: {categoryType: categoryType}}

@@ -14,7 +14,7 @@ export default class Home extends React.Component {
                     <Charts/>
                 </section>
                 <section>
-                    <Categorys/>
+                    <Categorys datePeriod={this.props.urlParams.period}/>
                 </section>
             </div>
         );
