@@ -9,7 +9,7 @@ module.exports.getCategorys = async function getCategorys(ctx, next) {
 
     try {
         const categorys = await Categorys.find({userId: ctx.request.query.userId})
-        ctx.body = {categories: categorys.map(mapCategorys)};
+        ctx.body = {categorys: categorys.map(mapCategorys)};
 
     } catch (err) {
         ctx.throw(400, err.message);

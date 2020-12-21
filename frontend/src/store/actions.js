@@ -54,13 +54,13 @@ export const toggleCategoryAction = (categoryType) => {
 
 export const updCategoryAction = (category) => {
     return (
-        {type: "UPD_CATEGORY_REQUEST", payload: {category: category}}
+        {type: "UPD_ONE_CATEGORY_REQUEST", payload: {category: category}}
     )
 }
 
-export const updCategorysInStoreAction = (categorys) => {
+export const updDataInStoreAction = (categorys) => {
     return (
-        {type: "UPD_CATEGORYS_STORE", payload: {categorys: categorys}}
+        {type: "UPD_DATA_STORE", payload: {categorys: categorys}}
     )
 }
 

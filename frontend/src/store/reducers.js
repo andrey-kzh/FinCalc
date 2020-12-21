@@ -31,22 +31,22 @@ export function toogleCategoryReducer(prevState = initialState, action) {
 }
 
 
-export function categorysReducer(prevState = initialState, action) {
+export function dataReducer(prevState = initialState, action) {
 
     switch (action.type) {
-        case "UPD_CATEGORYS_STORE": {
+        case "UPD_DATA_STORE": {
             return action.payload.categorys
         }
         case "ADD_NEW_CATEGORY_STORE": {
-            return [...prevState, ...[action.payload.category]]
+            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            data.entities.categorys[action.payload.category.id] = action.payload.category
+            data.result.categorys.push(action.payload.category.id)
+            return data
         }
         case "UPD_ONE_CATEGORY_STORE": {
-            return prevState.map((category) => {
-                if (category.id === action.payload.category.id) {
-                    return action.payload.category
-                }
-                return category
-            })
+            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            data.entities.categorys[action.payload.category.id] = action.payload.category
+            return data
         }
     }
     return prevState

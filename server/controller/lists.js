@@ -28,7 +28,7 @@ module.exports.getLists = async function getLists(ctx, next) {
                 select: 'title sum date'
             });
 
-        ctx.body = {categories: categorys.map(mapCategorysWithLists)};
+        ctx.body = {categorys: categorys.map(mapCategorysWithLists)};
 
     } catch (err) {
         ctx.throw(400, err.message);

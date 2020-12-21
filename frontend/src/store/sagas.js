@@ -1,10 +1,10 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import Api from '../api'
 import {saveTokensToStorage} from '../utils/tokens'
-import {normalizeLists} from "../utils/normalizeLists";
+import {normalizeLists, normlizeCategorys} from "../utils/normalize";
 
 import {
-    updCategorysInStoreAction,
+    updDataInStoreAction,
     updOneCategoryInStoreAction,
     addCategoryInStoreAction,
     loginUserAction,
@@ -74,9 +74,10 @@ function* fetchAddCategory(action) {
 
 function* fetchAllCategorys(action) {
     const response = yield call(api.getAllCategorys, action.payload.userId)
-    yield put(updCategorysInStoreAction(response.categories))
+    yield put(updDataInStoreAction(normlizeCategorys(response)))
 
 }
+
 
 function* fetchUpdateCategory(action) {
     const response = yield call(api.updCategoryRequest, action.payload.category)
@@ -84,9 +85,10 @@ function* fetchUpdateCategory(action) {
 
 }
 
+
 function* fetchAllListsWithCategorys(action) {
     const response = yield call(api.getAllListsWithCategorys, action.payload.userIdAndDateRange)
-    normalizeLists(response.categories)
+    console.log(normalizeLists(response))
     //yield put(updOneCategoryInStoreAction(response.category))
 
 }
@@ -99,7 +101,7 @@ function* sagas() {
     yield takeEvery("LOGOUT_REQUEST", fetchLogout);
     yield takeEvery("ADD_CATEGORY_REQUEST", fetchAddCategory);
     yield takeEvery("GET_CATEGORYS_REQUEST", fetchAllCategorys);
-    yield takeEvery("UPD_CATEGORY_REQUEST", fetchUpdateCategory);
+    yield takeEvery("UPD_ONE_CATEGORY_REQUEST", fetchUpdateCategory);
     yield takeEvery("GET_LISTS_REQUEST", fetchAllListsWithCategorys);
 }
 
