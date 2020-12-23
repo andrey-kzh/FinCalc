@@ -1,7 +1,8 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import Api from '../api'
 import {saveTokensToStorage} from '../utils/tokens'
-import {normalizeLists, normlizeCategorys} from "../utils/normalize";
+import {normalizeLists, normalizeCategorys} from "../utils/normalize";
+import {calcCharts} from "../utils/calcCharts";
 
 import {
     updDataInStoreAction,
@@ -10,6 +11,8 @@ import {
     loginUserAction,
     refreshTokensAction,
     authRequestAction,
+    addListItemInStoreAction,
+    updChartsInStoreAction,
 } from '../store/actions'
 
 const api = new Api();
@@ -74,7 +77,7 @@ function* fetchAddCategory(action) {
 
 function* fetchAllCategorys(action) {
     const response = yield call(api.getAllCategorys, action.payload.userId)
-    yield put(updDataInStoreAction(normlizeCategorys(response)))
+    yield put(updDataInStoreAction(normalizeCategorys(response)))
 
 }
 
@@ -88,8 +91,14 @@ function* fetchUpdateCategory(action) {
 
 function* fetchAllListsWithCategorys(action) {
     const response = yield call(api.getAllListsWithCategorys, action.payload.userIdAndDateRange)
-    console.log(normalizeLists(response))
-    //yield put(updOneCategoryInStoreAction(response.category))
+    const data = normalizeLists(response)
+    yield put(updDataInStoreAction(data))
+    yield put(updChartsInStoreAction(calcCharts(data)))
+}
+
+function* fetchAddListItem(action) {
+    const response = yield call(api.addListItemRequest, action.payload.listItem)
+    yield put(addListItemInStoreAction(response.listItem))
 
 }
 
@@ -103,6 +112,7 @@ function* sagas() {
     yield takeEvery("GET_CATEGORYS_REQUEST", fetchAllCategorys);
     yield takeEvery("UPD_ONE_CATEGORY_REQUEST", fetchUpdateCategory);
     yield takeEvery("GET_LISTS_REQUEST", fetchAllListsWithCategorys);
+    yield takeEvery("ADD_LIST_ITEM_REQUEST", fetchAddListItem);
 }
 
 export default sagas;

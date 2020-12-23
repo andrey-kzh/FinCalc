@@ -5,7 +5,7 @@ import ListComponent from './component'
 
 const mapStateToProps = state => {
     return {
-        lists: state.lists
+        list: state.data.entities.list,
     };
 };
 

@@ -1,6 +1,7 @@
 const Lists = require('../model/Lists');
 const Categorys = require('../model/Categorys');
 const {mapCategorysWithLists} = require('../mappers/categorys');
+const mapList = require('../mappers/lists');
 
 
 module.exports.getLists = async function getLists(ctx, next) {
@@ -16,7 +17,7 @@ module.exports.getLists = async function getLists(ctx, next) {
     }
 
     try {
-        const categorys = await Categorys.find({userId: ctx.request.query.userId})
+        const categorys = await Categorys.find({userId: ctx.request.query.userId, visible: true})
             .populate({
                 path: 'categoryList', //виртуал в моделе
                 match: {
@@ -38,13 +39,13 @@ module.exports.getLists = async function getLists(ctx, next) {
 module.exports.addLists = async function addLists(ctx, next) {
 
     try {
-        const list = await Lists.create({
+        const listItem = await Lists.create({
             title: ctx.request.body.title,
             categoryId: ctx.request.body.categoryId,
             date: new Date(),
             sum: ctx.request.body.sum,
         });
-        ctx.body = {listId: list.id};
+        ctx.body = {listItem: [listItem].map(mapList)[0]};
     } catch (err) {
         ctx.throw(400, err.message);
     }

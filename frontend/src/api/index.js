@@ -19,6 +19,7 @@ export default class Api {
         this.getAllCategorys = this.getAllCategorys.bind(this);
         this.updCategoryRequest = this.updCategoryRequest.bind(this);
         this.getAllListsWithCategorys = this.getAllListsWithCategorys.bind(this);
+        this.addListItemRequest = this.addListItemRequest.bind(this);
     }
 
 
@@ -162,6 +163,24 @@ export default class Api {
         const url = `/lists?userId=${userId}&dateMin=${dateMin}&dateMax=${dateMax}`;
         const options = {
             method: "GET",
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+
+    async addListItemRequest(listItem) {
+
+        const url = `/lists`;
+        const options = {
+            method: "POST",
+            body: JSON.stringify(listItem),
         };
         try {
             const response = await this.requestWithAccessToken(url, options)

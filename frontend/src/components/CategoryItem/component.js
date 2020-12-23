@@ -28,9 +28,12 @@ export default class CategoryItem extends React.PureComponent {
         return (
             <div className={`category`}>
                 <div className={`category__header`}>
-                    <div onClick={() => this.toggleList()} className={`category-txt`}>
+                    <div onClick={() => this.toggleList()}
+                         className={`category-txt ${(this.state.isOpenList) ? `category-txt_rotate90` : `category-txt_rotate0`}`}>
                         <div className={`category-txt__title`}>{this.props.title}</div>
-                        <div className={`category-txt__sum`}>{this.props.sum} &#8381;</div>
+                        <div className={`category-txt__sum`}>
+                            {(this.props.sum > 0) ? this.props.sum : 0} &#8381;
+                        </div>
                     </div>
                     <div className={`add-button`}>
                         <PlusButton
@@ -42,10 +45,11 @@ export default class CategoryItem extends React.PureComponent {
                 <div className={`category-content`}>
                     <AddForm
                         categoryId={this.props.id}
-                        isOpen={this.state.isOpenForm}/>
+                        isOpen={this.state.isOpenForm}
+                        toggleCallback={() => this.toggleForm()}/>
 
                     <List
-                        categoryId={this.props.id}
+                        listIdArr={this.props.listIdArr}
                         isOpen={this.state.isOpenList}/>
                 </div>
 

@@ -31,6 +31,17 @@ export function toogleCategoryReducer(prevState = initialState, action) {
 }
 
 
+export function chartsReducer(prevState = initialState, action) {
+
+    switch (action.type) {
+        case "UPD_CHARTS_STORE": {
+            return action.payload.charts
+        }
+    }
+    return prevState
+}
+
+
 export function dataReducer(prevState = initialState, action) {
 
     switch (action.type) {
@@ -46,6 +57,13 @@ export function dataReducer(prevState = initialState, action) {
         case "UPD_ONE_CATEGORY_STORE": {
             let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
             data.entities.categorys[action.payload.category.id] = action.payload.category
+            return data
+        }
+        case "ADD_NEW_LIST_ITEM_STORE": {
+            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            data.entities.list[action.payload.listItem.id] = action.payload.listItem
+            data.entities.categorys[action.payload.listItem.categoryId].list.push(action.payload.listItem.id)
+            data.entities.categorys[action.payload.listItem.categoryId].totalSum += action.payload.listItem.sum
             return data
         }
     }

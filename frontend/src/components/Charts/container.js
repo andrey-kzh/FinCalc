@@ -4,6 +4,7 @@ import ChartsComponent from './component'
 
 
 const mapStateToProps = state => {
+    if (state.charts === null) return {}
     return {
         charts: state.charts
 

@@ -75,3 +75,21 @@ export const updOneCategoryInStoreAction = (category) => {
         {type: "UPD_ONE_CATEGORY_STORE", payload: {category: category}}
     )
 }
+
+export const addListItemAction = (listItem) => {
+    return (
+        {type: "ADD_LIST_ITEM_REQUEST", payload: {listItem: listItem}}
+    )
+}
+
+export const addListItemInStoreAction = (listItem) => {
+    return (
+        {type: "ADD_NEW_LIST_ITEM_STORE", payload: {listItem: listItem}}
+    )
+}
+
+export const updChartsInStoreAction = (charts) => {
+    return (
+        {type: "UPD_CHARTS_STORE", payload: charts}
+    )
+}

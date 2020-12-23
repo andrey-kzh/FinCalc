@@ -10,13 +10,27 @@ export default class AddFormComponent extends React.PureComponent {
 
         this.state = {
             sum: '',
-            comment: ''
+            title: ''
         }
     }
 
     handleChange(e, val) {
-        this.setState({[val]: e.target.value});
+        const fieldValue = (val === `sum`) ? e.target.value.replace(/\D/, '') : e.target.value
+        this.setState({[val]: fieldValue});
     }
+
+
+    checkAndAddListItem(listItem) {
+        if (listItem.sum && listItem.title) {
+            this.props.addListItem(listItem)
+            this.setState({
+                sum: '',
+                title: ''
+            })
+            this.props.toggleCallback()
+        }
+    }
+
 
     render() {
 
@@ -32,13 +46,16 @@ export default class AddFormComponent extends React.PureComponent {
 
                     <textarea
                         value={this.state.comment}
-                        onChange={(e) => this.handleChange(e, 'comment')}
+                        onChange={(e) => this.handleChange(e, 'title')}
                         placeholder="Комментарий"
-                        className={`add-form__txt`} />
+                        className={`add-form__txt`}/>
 
                     <SubmitButton
                         className={'button_add-form'}
-                        callback={() => console.log(1)}>
+                        callback={() => this.checkAndAddListItem({
+                            ...{categoryId: this.props.categoryId},
+                            ...this.state
+                        })}>
                         Добавить
                     </SubmitButton>
 

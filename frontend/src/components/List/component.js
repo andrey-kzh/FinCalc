@@ -10,9 +10,10 @@ export default class ListComponent extends React.PureComponent {
 
     renderItems() {
 
-        if (this.props.lists[this.props.categoryId] !== undefined) {
+        if (this.props.listIdArr.length > 0) {
 
-            return this.props.lists[this.props.categoryId].map((listItem) => {
+            return this.props.listIdArr.map((listItemId) => {
+                const listItem = this.props.list[listItemId]
                 return <ListItem
                     key={listItem.id}
                     title={listItem.title}

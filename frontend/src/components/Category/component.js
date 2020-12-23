@@ -9,33 +9,39 @@ export default class CategoryComponent extends React.PureComponent {
     }
 
     returnClassName() {
-        if(this.props.type !== this.props.toggleCategory) {
-           return 'details__block_hide'
+        if (this.props.type !== this.props.toggleCategory) {
+            return 'details__block_hide'
         }
         return ''
     }
 
-    renderItems() {
-        return this.props.categorys.map((categoryItem) => {
 
-            if (categoryItem.type === this.props.type) {
+    renderItems() {
+        return this.props.categorysIdArr.map((categoryId) => {
+            const category = this.props.categorys[categoryId]
+            if (category.type === this.props.type) {
                 return <CategoryItem
-                    key={categoryItem.id}
-                    id={categoryItem.id}
-                    title={categoryItem.title}
-                    sum={categoryItem.sum}
-                    type={categoryItem.type}
+                    key={category.id}
+                    id={category.id}
+                    title={category.title}
+                    type={category.type}
+                    sum={category.totalSum}
+                    listIdArr={category.list}
                 />
             }
         })
     }
 
+
     render() {
-        return (
-            <div className={`details__block ${this.returnClassName()}`}>
-                {this.renderItems()}
-            </div>
-        )
+        if ('categorys' in this.props) {
+            return (
+                <div className={`details__block ${this.returnClassName()}`}>
+                    {this.renderItems()}
+                </div>
+            )
+        }
+        return []
     }
 
 }
