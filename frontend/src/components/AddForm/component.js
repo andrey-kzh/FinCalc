@@ -53,7 +53,8 @@ export default class AddFormComponent extends React.PureComponent {
                     <SubmitButton
                         className={'button_add-form'}
                         callback={() => this.checkAndAddListItem({
-                            ...{categoryId: this.props.categoryId},
+                            ...{categoryId: this.props.categoryId,
+                                categoryType: this.props.categoryType},
                             ...this.state
                         })}>
                         Добавить

@@ -1,4 +1,5 @@
 import {initialState} from './index'
+import {calcChartsPersents} from "../utils/calcCharts";
 
 export function returnStateReducer(prevState = initialState) {
     return prevState;
@@ -36,6 +37,31 @@ export function chartsReducer(prevState = initialState, action) {
     switch (action.type) {
         case "UPD_CHARTS_STORE": {
             return action.payload.charts
+        }
+        case "ADD_LIST_TO_CHARTS_STORE": {
+            const newChartsValues = prevState.map((chart) => {
+                if (chart.type === action.payload.listItem.categoryType) {
+                    return {
+                        ...chart,
+                        ...{sum: chart.sum += action.payload.listItem.sum}
+                    }
+                }
+                return chart
+            })
+
+            let income = 0, expense = 0
+            newChartsValues.forEach((chart) => {
+                if (chart.type === `income`) income = chart.sum
+                if (chart.type === `expense`) expense = chart.sum
+            })
+
+            const persents = calcChartsPersents(income, expense)
+
+            return newChartsValues.map((chart) => {
+                if (chart.type === `income`) return {...chart, ...{persent: persents.incomePersents}}
+                if (chart.type === `expense`) return {...chart, ...{persent: persents.expensePersents}}
+                if (chart.type === `savings`) return {...chart, ...{persent: persents.savingsPersents}}
+            })
         }
     }
     return prevState

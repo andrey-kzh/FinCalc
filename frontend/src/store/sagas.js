@@ -13,6 +13,7 @@ import {
     authRequestAction,
     addListItemInStoreAction,
     updChartsInStoreAction,
+    addListToChartsInStoreAction
 } from '../store/actions'
 
 const api = new Api();
@@ -99,6 +100,9 @@ function* fetchAllListsWithCategorys(action) {
 function* fetchAddListItem(action) {
     const response = yield call(api.addListItemRequest, action.payload.listItem)
     yield put(addListItemInStoreAction(response.listItem))
+    yield put(addListToChartsInStoreAction(
+        {...response.listItem, ...{categoryType: action.payload.listItem.categoryType}}
+    ))
 
 }
 

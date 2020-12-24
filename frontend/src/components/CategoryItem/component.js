@@ -44,6 +44,7 @@ export default class CategoryItem extends React.PureComponent {
 
                 <div className={`category-content`}>
                     <AddForm
+                        categoryType={this.props.type}
                         categoryId={this.props.id}
                         isOpen={this.state.isOpenForm}
                         toggleCallback={() => this.toggleForm()}/>

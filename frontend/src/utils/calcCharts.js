@@ -10,6 +10,18 @@ export function calcCharts(data) {
         }
     })
 
+    const persents = calcChartsPersents(income, expense)
+
+    return ({
+        charts: [
+            {title: `Доход`, type: `income`, sum: income, persent: persents.incomePersents},
+            {title: `Расход`, type: `expense`, sum: expense, persent: persents.expensePersents},
+            {title: `Накопления`, type: `savings`, sum: income - expense, persent: persents.savingsPersents}
+        ]
+    })
+}
+
+export function calcChartsPersents(income, expense) {
     const onePersent = (income >= expense) ? 100 / income : 100 / expense
     let incomePersents = Math.ceil((income > expense) ? 100 : income * onePersent)
     let expensePersents = Math.ceil((income < expense) ? 100 : expense * onePersent)
@@ -19,11 +31,9 @@ export function calcCharts(data) {
     if (expensePersents < 1) expensePersents = 1
     if (savingsPersents < 1) savingsPersents = 1
 
-    return ({
-        charts: [
-            {title: `Доход`, type: `income`, sum: income, persent: incomePersents},
-            {title: `Расход`, type: `expense`, sum: expense, persent: expensePersents},
-            {title: `Накопления`, type: `savings`, sum: income - expense, persent: savingsPersents}
-        ]
-    })
+    return {
+        incomePersents: incomePersents,
+        expensePersents: expensePersents,
+        savingsPersents: savingsPersents
+    }
 }

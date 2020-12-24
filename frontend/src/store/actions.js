@@ -93,3 +93,9 @@ export const updChartsInStoreAction = (charts) => {
         {type: "UPD_CHARTS_STORE", payload: charts}
     )
 }
+
+export const addListToChartsInStoreAction = (listItem) => {
+    return (
+        {type: "ADD_LIST_TO_CHARTS_STORE", payload: {listItem: listItem}}
+    )
+}
