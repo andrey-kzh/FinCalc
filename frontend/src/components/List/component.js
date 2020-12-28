@@ -15,6 +15,7 @@ export default class ListComponent extends React.PureComponent {
             return this.props.listIdArr.map((listItemId) => {
                 const listItem = this.props.list[listItemId]
                 return <ListItem
+                    id={listItem.id}
                     key={listItem.id}
                     title={listItem.title}
                     sum={listItem.sum}

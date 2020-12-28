@@ -1,0 +1,38 @@
+.close-window-container {
+    text-align: right;
+    padding: 0 0 20px 0;
+}
+
+.close-window {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    width: 26px;
+    height: 26px;
+    position: relative;
+    cursor: pointer;
+}
+
+.close-window:hover {
+    opacity: 0.5;
+}
+
+.close-window::before,
+.close-window::after {
+    position: absolute;
+    top: 0;
+    left: 12px;
+    content: ' ';
+    height: 26px;
+    width: 2px;
+    background-color: #000;
+}
+
+.close-window::before {
+    transform: rotate(45deg);
+}
+
+.close-window::after {
+    transform: rotate(-45deg);
+}
