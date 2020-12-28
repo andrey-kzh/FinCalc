@@ -22,14 +22,14 @@
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
     animation-duration: 0.2s;
-    max-width: 500px;
-    min-width: 400px;
+    width: 500px;
     box-sizing: border-box;
 }
 
 @media screen and (max-width: 480px) {
     .modal-window {
         min-width: 280px;
+        width: auto;
     }
 }
 
