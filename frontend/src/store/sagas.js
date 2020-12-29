@@ -2,7 +2,6 @@ import {call, put, takeEvery} from 'redux-saga/effects'
 import Api from '../api'
 import {saveTokensToStorage} from '../utils/tokens'
 import {normalizeLists, normalizeCategorys} from "../utils/normalize";
-import {calcCharts} from "../utils/calcCharts";
 
 import {
     updDataInStoreAction,
@@ -12,8 +11,6 @@ import {
     refreshTokensAction,
     authRequestAction,
     addListItemInStoreAction,
-    updChartsInStoreAction,
-    addListToChartsInStoreAction,
     delOneCategoryInStoreAction,
     updOneListItemInStoreAction,
     delOneListItemInStoreAction
@@ -95,17 +92,7 @@ function* fetchUpdateCategory(action) {
 
 function* fetchDeleteCategory(action) {
     const response = yield call(api.delCategoryRequest, action.payload.category)
-    yield put(delOneCategoryInStoreAction(response.categoryId))
-}
-
-function* fetchUpdateListItem(action) {
-    const response = yield call(api.updListItemRequest, action.payload.listItem)
-    yield put(updOneListItemInStoreAction(response.listItem))
-}
-
-function* fetchDeleteListItem(action) {
-    const response = yield call(api.delListItemRequest, action.payload.listItem)
-    yield put(delOneListItemInStoreAction(response.listId))
+    yield put(delOneCategoryInStoreAction(response.category))
 }
 
 
@@ -113,16 +100,24 @@ function* fetchAllListsWithCategorys(action) {
     const response = yield call(api.getAllListsWithCategorys, action.payload.userIdAndDateRange)
     const data = normalizeLists(response)
     yield put(updDataInStoreAction(data))
-    yield put(updChartsInStoreAction(calcCharts(data)))
 }
+
 
 function* fetchAddListItem(action) {
     const response = yield call(api.addListItemRequest, action.payload.listItem)
     yield put(addListItemInStoreAction(response.listItem))
-    yield put(addListToChartsInStoreAction(
-        {...response.listItem, ...{categoryType: action.payload.listItem.categoryType}}
-    ))
+}
 
+
+function* fetchUpdateListItem(action) {
+    const response = yield call(api.updListItemRequest, action.payload.listItem)
+    yield put(updOneListItemInStoreAction(response.listItem))
+}
+
+
+function* fetchDeleteListItem(action) {
+    const response = yield call(api.delListItemRequest, action.payload.listItem)
+    yield put(delOneListItemInStoreAction(response.listItem))
 }
 
 

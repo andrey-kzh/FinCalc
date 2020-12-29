@@ -58,7 +58,7 @@ module.exports.delCategory = async function delCategory(ctx, next) {
     try {
         const category = await Categorys.findByIdAndDelete(ctx.request.body.id);
         await Lists.deleteMany({categoryId: category.id});
-        ctx.body = {categoryId: category.id}
+        ctx.body = {category: [category].map(mapCategorys)[0]}
     } catch (err) {
         ctx.throw(400, err.message);
     }

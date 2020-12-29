@@ -12,17 +12,17 @@ export function calcCharts(data) {
 
     const persents = calcChartsPersents(income, expense)
 
-    return ({
-        charts: [
-            {title: `Доход`, type: `income`, sum: income, persent: persents.incomePersents},
-            {title: `Расход`, type: `expense`, sum: expense, persent: persents.expensePersents},
-            {title: `Накопления`, type: `savings`, sum: income - expense, persent: persents.savingsPersents}
-        ]
-    })
+    return ([
+        {title: `Доход`, type: `income`, sum: income, persent: persents.incomePersents},
+        {title: `Расход`, type: `expense`, sum: expense, persent: persents.expensePersents},
+        {title: `Накопления`, type: `savings`, sum: income - expense, persent: persents.savingsPersents}
+    ])
 }
 
 export function calcChartsPersents(income, expense) {
-    const onePersent = (income >= expense) ? 100 / income : 100 / expense
+
+    let onePersent = 0
+    if (income !== 0 && expense !== 0) onePersent = (income > expense) ? 100 / income : 100 / expense
     let incomePersents = Math.ceil((income > expense) ? 100 : income * onePersent)
     let expensePersents = Math.ceil((income < expense) ? 100 : expense * onePersent)
     let savingsPersents = Math.ceil((income - expense) * onePersent)

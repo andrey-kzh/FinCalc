@@ -74,7 +74,7 @@ module.exports.delLists = async function delLists(ctx, next) {
 
     try {
         const list = await Lists.findByIdAndDelete(ctx.request.body.id);
-        ctx.body = {listId: list.id};
+        ctx.body = {listItem: [list].map(mapList)[0]};
     } catch (err) {
         ctx.throw(400, err.message);
     }

@@ -7,7 +7,6 @@ import {
     toogleCategoryReducer,
     userReducer,
     dataReducer,
-    chartsReducer,
 } from "./reducers"
 
 const sagaMiddleware = createSagaMiddleware()
@@ -25,15 +24,12 @@ export const initialState = {
         {title: 'Шесть месяцев', link: 'half-year'},
         {title: 'Этот год', link: 'year'}
     ],
-    charts: null,
     data: null,
 }
 
 const reducer = combineReducers({
     user: userReducer,
-
     menu: returnStateReducer,
-    charts: chartsReducer,
     data: dataReducer,
     toggleCategory: toogleCategoryReducer,
 })

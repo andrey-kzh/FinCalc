@@ -20,9 +20,12 @@ export default class AddFormComponent extends React.PureComponent {
     }
 
 
-    checkAndAddListItem(listItem) {
-        if (listItem.sum && listItem.title) {
-            this.props.addListItem(listItem)
+    checkAndAddListItem() {
+        if (this.state.sum && this.state.title) {
+            this.props.addListItem({
+                ...{categoryId: this.props.categoryId},
+                ...this.state
+            })
             this.setState({
                 sum: '',
                 title: ''
@@ -52,11 +55,7 @@ export default class AddFormComponent extends React.PureComponent {
 
                     <SubmitButton
                         className={'button_add-form'}
-                        callback={() => this.checkAndAddListItem({
-                            ...{categoryId: this.props.categoryId,
-                                categoryType: this.props.categoryType},
-                            ...this.state
-                        })}>
+                        callback={() => this.checkAndAddListItem()}>
                         Добавить
                     </SubmitButton>
 

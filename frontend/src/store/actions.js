@@ -89,15 +89,15 @@ export const updOneListItemInStoreAction = (listItem) => {
     )
 }
 
-export const delOneCategoryInStoreAction = (categoryId) => {
+export const delOneCategoryInStoreAction = (category) => {
     return (
-        {type: "DEL_ONE_CATEGORY_STORE", payload: {categoryId: categoryId}}
+        {type: "DEL_ONE_CATEGORY_STORE", payload: {category: category}}
     )
 }
 
-export const delOneListItemInStoreAction = (listId) => {
+export const delOneListItemInStoreAction = (listItem) => {
     return (
-        {type: "DEL_ONE_LIST_ITEM_STORE", payload: {listId: listId}}
+        {type: "DEL_ONE_LIST_ITEM_STORE", payload: {listItem: listItem}}
     )
 }
 
@@ -122,17 +122,5 @@ export const delListItemAction = (listItem) => {
 export const addListItemInStoreAction = (listItem) => {
     return (
         {type: "ADD_NEW_LIST_ITEM_STORE", payload: {listItem: listItem}}
-    )
-}
-
-export const updChartsInStoreAction = (charts) => {
-    return (
-        {type: "UPD_CHARTS_STORE", payload: charts}
-    )
-}
-
-export const addListToChartsInStoreAction = (listItem) => {
-    return (
-        {type: "ADD_LIST_TO_CHARTS_STORE", payload: {listItem: listItem}}
     )
 }

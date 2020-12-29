@@ -54,13 +54,16 @@ export default class ListItemComponent extends React.PureComponent {
         this.props.updListItem({
             id: this.props.id,
             title: this.state.title,
-            sum: this.state.sum
+            sum: this.state.sum,
         })
         this.closeWindows()
     }
 
     deleteListItem() {
-        this.props.delListItem({id: this.props.id})
+        this.props.delListItem({
+            id: this.props.id,
+            sum: this.props.sum
+        })
         this.closeWindows()
     }
 
