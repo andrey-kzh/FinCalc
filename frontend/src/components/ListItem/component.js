@@ -5,7 +5,7 @@ import CloseWindowButton from "../CloseWindowButton";
 import SubmitButton from "../SubmitButton";
 import ConfirmDeleteWindow from "../ConfirmDeleteWindow";
 
-export default class ListItem extends React.PureComponent {
+export default class ListItemComponent extends React.PureComponent {
 
     constructor(props) {
         super(props)
@@ -51,12 +51,16 @@ export default class ListItem extends React.PureComponent {
     }
 
     saveListItem() {
-        console.log('1')
+        this.props.updListItem({
+            id: this.props.id,
+            title: this.state.title,
+            sum: this.state.sum
+        })
         this.closeWindows()
     }
 
     deleteListItem() {
-        console.log('2')
+        this.props.delListItem({id: this.props.id})
         this.closeWindows()
     }
 

@@ -59,19 +59,22 @@ export default class CategoryItemSetupComponent extends React.PureComponent {
     }
 
     saveCategoryItem() {
-        console.log('1')
+        this.props.updCategory({
+            id: this.props.id,
+            title: this.state.title,
+        })
         this.closeWindows()
     }
 
     deleteCategoryItem() {
-        console.log('2')
+        this.props.delCategory({id: this.props.id})
         this.closeWindows()
     }
 
 
     render() {
         return [
-            <div className="category__setup">
+            <div key={this.props.id} className="category__setup">
                 <div onClick={() => this.openEditWindow()}
                      className={`category-setup__item ${!this.props.visible && `category-setup__item_hidden`}`}>
                     <div className="category-setup__title">

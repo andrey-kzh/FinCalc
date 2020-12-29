@@ -80,19 +80,40 @@ export function dataReducer(prevState = initialState, action) {
             data.result.categorys.push(action.payload.category.id)
             return data
         }
+        case "ADD_NEW_LIST_ITEM_STORE": {
+            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            data.entities.list[action.payload.listItem.id] = action.payload.listItem
+            data.entities.categorys[action.payload.listItem.categoryId].list.unshift(action.payload.listItem.id)
+            data.entities.categorys[action.payload.listItem.categoryId].totalSum += action.payload.listItem.sum
+            return data
+        }
         case "UPD_ONE_CATEGORY_STORE": {
             let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
             data.entities.categorys[action.payload.category.id] = action.payload.category
             return data
         }
-        case "ADD_NEW_LIST_ITEM_STORE": {
+        case "UPD_ONE_LIST_ITEM_STORE": {
             let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
             data.entities.list[action.payload.listItem.id] = action.payload.listItem
-            data.entities.categorys[action.payload.listItem.categoryId].list.push(action.payload.listItem.id)
-            data.entities.categorys[action.payload.listItem.categoryId].totalSum += action.payload.listItem.sum
+            return data
+        }
+        case "DEL_ONE_CATEGORY_STORE": {
+            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            delete data.entities.categorys[action.payload.categoryId]
+            data.result.categorys = data.result.categorys.filter((categoryId) => {
+                return categoryId !== action.payload.categoryId
+            })
+            return data
+        }
+        case "DEL_ONE_LIST_ITEM_STORE": {
+            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            const categoryId = data.entities.list[action.payload.listId].categoryId
+            data.entities.categorys[categoryId].list = data.entities.categorys[categoryId].list.filter((listId) => {
+                return listId !== action.payload.listId
+            })
+            delete data.entities.list[action.payload.listId]
             return data
         }
     }
     return prevState
-
 }

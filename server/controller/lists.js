@@ -51,6 +51,25 @@ module.exports.addLists = async function addLists(ctx, next) {
     }
 };
 
+module.exports.updLists = async function updLists(ctx, next) {
+
+    try {
+        let updFields = {};
+        if ('title' in ctx.request.body) updFields.title = ctx.request.body.title;
+        if ('sum' in ctx.request.body) updFields.sum = ctx.request.body.sum;
+
+        const list = await Lists.findByIdAndUpdate(
+            ctx.request.body.id,
+            updFields,
+            {new: true} //option for return new object after update
+        );
+
+        ctx.body = {listItem: [list].map(mapList)[0]};
+    } catch (err) {
+        ctx.throw(400, err.message);
+    }
+};
+
 module.exports.delLists = async function delLists(ctx, next) {
 
     try {

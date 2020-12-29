@@ -25,7 +25,7 @@ categorysSchema.virtual('categoryList', {
     localField: '_id',
     foreignField: 'categoryId',
     justOne: false,
-    //options: {sort: {date: -1}}
+    options: {sort: {date: -1}}
 });
 
 module.exports = connection.model('Categorys', categorysSchema);

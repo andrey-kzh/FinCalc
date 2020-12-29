@@ -28,9 +28,27 @@ export const refreshTokensAction = (nextAction) => {
     )
 }
 
+export const toggleCategoryAction = (categoryType) => {
+    return (
+        {type: "TOGGLE_CATEGORYS_TYPE_STORE", payload: {categoryType: categoryType}}
+    )
+}
+
 export const addCategoryAction = (category) => {
     return (
         {type: "ADD_CATEGORY_REQUEST", payload: category}
+    )
+}
+
+export const updCategoryAction = (category) => {
+    return (
+        {type: "UPD_ONE_CATEGORY_REQUEST", payload: {category: category}}
+    )
+}
+
+export const delCategoryAction = (category) => {
+    return (
+        {type: "DEL_ONE_CATEGORY_REQUEST", payload: {category: category}}
     )
 }
 
@@ -46,17 +64,6 @@ export const getAllListsWithCategorysAction = (obj) => {
     )
 }
 
-export const toggleCategoryAction = (categoryType) => {
-    return (
-        {type: "TOGGLE_CATEGORYS_TYPE_STORE", payload: {categoryType: categoryType}}
-    )
-}
-
-export const updCategoryAction = (category) => {
-    return (
-        {type: "UPD_ONE_CATEGORY_REQUEST", payload: {category: category}}
-    )
-}
 
 export const updDataInStoreAction = (categorys) => {
     return (
@@ -76,9 +83,39 @@ export const updOneCategoryInStoreAction = (category) => {
     )
 }
 
+export const updOneListItemInStoreAction = (listItem) => {
+    return (
+        {type: "UPD_ONE_LIST_ITEM_STORE", payload: {listItem: listItem}}
+    )
+}
+
+export const delOneCategoryInStoreAction = (categoryId) => {
+    return (
+        {type: "DEL_ONE_CATEGORY_STORE", payload: {categoryId: categoryId}}
+    )
+}
+
+export const delOneListItemInStoreAction = (listId) => {
+    return (
+        {type: "DEL_ONE_LIST_ITEM_STORE", payload: {listId: listId}}
+    )
+}
+
 export const addListItemAction = (listItem) => {
     return (
         {type: "ADD_LIST_ITEM_REQUEST", payload: {listItem: listItem}}
+    )
+}
+
+export const updListItemAction = (listItem) => {
+    return (
+        {type: "UPD_ONE_LIST_ITEM_REQUEST", payload: {listItem: listItem}}
+    )
+}
+
+export const delListItemAction = (listItem) => {
+    return (
+        {type: "DEL_ONE_LIST_ITEM_REQUEST", payload: {listItem: listItem}}
     )
 }
 

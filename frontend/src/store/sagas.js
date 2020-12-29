@@ -13,7 +13,10 @@ import {
     authRequestAction,
     addListItemInStoreAction,
     updChartsInStoreAction,
-    addListToChartsInStoreAction
+    addListToChartsInStoreAction,
+    delOneCategoryInStoreAction,
+    updOneListItemInStoreAction,
+    delOneListItemInStoreAction
 } from '../store/actions'
 
 const api = new Api();
@@ -90,6 +93,22 @@ function* fetchUpdateCategory(action) {
 }
 
 
+function* fetchDeleteCategory(action) {
+    const response = yield call(api.delCategoryRequest, action.payload.category)
+    yield put(delOneCategoryInStoreAction(response.categoryId))
+}
+
+function* fetchUpdateListItem(action) {
+    const response = yield call(api.updListItemRequest, action.payload.listItem)
+    yield put(updOneListItemInStoreAction(response.listItem))
+}
+
+function* fetchDeleteListItem(action) {
+    const response = yield call(api.delListItemRequest, action.payload.listItem)
+    yield put(delOneListItemInStoreAction(response.listId))
+}
+
+
 function* fetchAllListsWithCategorys(action) {
     const response = yield call(api.getAllListsWithCategorys, action.payload.userIdAndDateRange)
     const data = normalizeLists(response)
@@ -117,6 +136,9 @@ function* sagas() {
     yield takeEvery("UPD_ONE_CATEGORY_REQUEST", fetchUpdateCategory);
     yield takeEvery("GET_LISTS_REQUEST", fetchAllListsWithCategorys);
     yield takeEvery("ADD_LIST_ITEM_REQUEST", fetchAddListItem);
+    yield takeEvery("DEL_ONE_CATEGORY_REQUEST", fetchDeleteCategory);
+    yield takeEvery("UPD_ONE_LIST_ITEM_REQUEST", fetchUpdateListItem);
+    yield takeEvery("DEL_ONE_LIST_ITEM_REQUEST", fetchDeleteListItem);
 }
 
 export default sagas;

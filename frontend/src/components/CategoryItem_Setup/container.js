@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import CategoryItemSetupComponent from './component'
-import {updCategoryAction} from "../../store/actions";
+import {updCategoryAction, delCategoryAction} from "../../store/actions";
 
 const mapStateToProps = state => {
     return {};
@@ -10,7 +10,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updCategory: (category) => dispatch(updCategoryAction(category))
+        updCategory: (category) => dispatch(updCategoryAction(category)),
+        delCategory: (category) => dispatch(delCategoryAction(category))
     };
 };
 
