@@ -1,4 +1,5 @@
 import {initialState} from './index'
+import {clone} from 'ramda'
 
 export function returnStateReducer(prevState = initialState) {
     return prevState;
@@ -37,13 +38,13 @@ export function dataReducer(prevState = initialState, action) {
             return action.payload.categorys
         }
         case "ADD_NEW_CATEGORY_STORE": {
-            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            let data = clone(prevState)
             data.entities.categorys[action.payload.category.id] = action.payload.category
             data.result.categorys.push(action.payload.category.id)
             return data
         }
         case "ADD_NEW_LIST_ITEM_STORE": {
-            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            let data = clone(prevState)
             if (!data.entities.list) data.entities.list = {}
             data.entities.list[action.payload.listItem.id] = action.payload.listItem
             data.entities.categorys[action.payload.listItem.categoryId].list.unshift(action.payload.listItem.id)
@@ -51,12 +52,12 @@ export function dataReducer(prevState = initialState, action) {
             return data
         }
         case "UPD_ONE_CATEGORY_STORE": {
-            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            let data = clone(prevState)
             data.entities.categorys[action.payload.category.id] = action.payload.category
             return data
         }
         case "UPD_ONE_LIST_ITEM_STORE": {
-            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            let data = clone(prevState)
             const listItem = action.payload.listItem
             const prevSum = prevState.entities.list[listItem.id].sum
             data.entities.list[listItem.id] = listItem
@@ -65,7 +66,7 @@ export function dataReducer(prevState = initialState, action) {
             return data
         }
         case "DEL_ONE_CATEGORY_STORE": {
-            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            let data = clone(prevState)
             delete data.entities.categorys[action.payload.category.id]
             data.result.categorys = data.result.categorys.filter((categoryId) => {
                 return categoryId !== action.payload.category.id
@@ -73,7 +74,7 @@ export function dataReducer(prevState = initialState, action) {
             return data
         }
         case "DEL_ONE_LIST_ITEM_STORE": {
-            let data = JSON.parse(JSON.stringify(prevState)) //замени потом это
+            let data = clone(prevState)
             const listItem = action.payload.listItem
             const newListArr = data.entities.categorys[listItem.categoryId].list.filter((listId) => {
                 return listId !== listItem.id
