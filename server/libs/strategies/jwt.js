@@ -9,9 +9,6 @@ opts.secretOrKey = config.jwtSecretKey;
 
 module.exports = new JwtStrategy(opts, async (jwtPayload, done) => {
 
-    console.log(new Date(jwtPayload.expires))
-    console.log(new Date())
-
     try {
         if (new Date(jwtPayload.expires) < new Date()) {
             return done({code: 'l03', mes: 'Access token expires'}, false);

@@ -1,5 +1,4 @@
 .category {
-    position: relative;
     margin: 0 0 20px 0;
 }
 
@@ -32,11 +31,10 @@
     display: block;
     border: 10px solid transparent;
     border-left: 18px solid #000000;
-    transform: rotate(0deg);
     transform-origin: 8px 9px 0;
     transition: all 0.1s linear 0s;
     position: absolute;
-    left: 10px;
+    left: 2px;
     top: 4px;
 }
 
@@ -46,8 +44,12 @@
     }
 }
 
-.category-txt:hover:before {
+.category-txt_rotate90:before {
     transform: rotate(90deg);
+}
+
+.category-txt_rotate0:before {
+    transform: rotate(0deg);
 }
 
 .category-txt__title,

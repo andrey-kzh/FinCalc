@@ -1,0 +1,58 @@
+.modal-window-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-window {
+    position: relative;
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.2s;
+    width: 500px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 480px) {
+    .modal-window {
+        min-width: 280px;
+        width: auto;
+    }
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.button_modal-window {
+    height: 36px;
+}
+
+@media screen and (max-width: 480px) {
+    .button_modal-window {
+        width: 46%;
+    }
+}
+
+.modal-window__buttons {
+    display: flex;
+    justify-content: space-between;
+}

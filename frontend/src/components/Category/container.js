@@ -4,8 +4,10 @@ import CategoryComponent from './component'
 
 
 const mapStateToProps = state => {
+    if (state.data === null) return {}
     return {
-        categorys: state.categorys,
+        categorys: state.data.entities.categorys,
+        categorysIdArr: state.data.result.categorys,
         toggleCategory: state.toggleCategory
     };
 };

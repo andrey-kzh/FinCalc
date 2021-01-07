@@ -1,14 +1,19 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import Api from '../api'
 import {saveTokensToStorage} from '../utils/tokens'
+import {normalizeLists, normalizeCategorys} from "../utils/normalize";
 
 import {
-    updCategorysInStoreAction,
+    updDataInStoreAction,
     updOneCategoryInStoreAction,
     addCategoryInStoreAction,
     loginUserAction,
     refreshTokensAction,
     authRequestAction,
+    addListItemInStoreAction,
+    delOneCategoryInStoreAction,
+    updOneListItemInStoreAction,
+    delOneListItemInStoreAction
 } from '../store/actions'
 
 const api = new Api();
@@ -73,14 +78,46 @@ function* fetchAddCategory(action) {
 
 function* fetchAllCategorys(action) {
     const response = yield call(api.getAllCategorys, action.payload.userId)
-    yield put(updCategorysInStoreAction(response.categories))
+    yield put(updDataInStoreAction(normalizeCategorys(response)))
 
 }
+
 
 function* fetchUpdateCategory(action) {
     const response = yield call(api.updCategoryRequest, action.payload.category)
     yield put(updOneCategoryInStoreAction(response.category))
 
+}
+
+
+function* fetchDeleteCategory(action) {
+    const response = yield call(api.delCategoryRequest, action.payload.category)
+    yield put(delOneCategoryInStoreAction(response.category))
+}
+
+
+function* fetchAllListsWithCategorys(action) {
+    const response = yield call(api.getAllListsWithCategorys, action.payload.userIdAndDateRange)
+    const data = normalizeLists(response)
+    yield put(updDataInStoreAction(data))
+}
+
+
+function* fetchAddListItem(action) {
+    const response = yield call(api.addListItemRequest, action.payload.listItem)
+    yield put(addListItemInStoreAction(response.listItem))
+}
+
+
+function* fetchUpdateListItem(action) {
+    const response = yield call(api.updListItemRequest, action.payload.listItem)
+    yield put(updOneListItemInStoreAction(response.listItem))
+}
+
+
+function* fetchDeleteListItem(action) {
+    const response = yield call(api.delListItemRequest, action.payload.listItem)
+    yield put(delOneListItemInStoreAction(response.listItem))
 }
 
 
@@ -91,7 +128,12 @@ function* sagas() {
     yield takeEvery("LOGOUT_REQUEST", fetchLogout);
     yield takeEvery("ADD_CATEGORY_REQUEST", fetchAddCategory);
     yield takeEvery("GET_CATEGORYS_REQUEST", fetchAllCategorys);
-    yield takeEvery("UPD_CATEGORY_REQUEST", fetchUpdateCategory);
+    yield takeEvery("UPD_ONE_CATEGORY_REQUEST", fetchUpdateCategory);
+    yield takeEvery("GET_LISTS_REQUEST", fetchAllListsWithCategorys);
+    yield takeEvery("ADD_LIST_ITEM_REQUEST", fetchAddListItem);
+    yield takeEvery("DEL_ONE_CATEGORY_REQUEST", fetchDeleteCategory);
+    yield takeEvery("UPD_ONE_LIST_ITEM_REQUEST", fetchUpdateListItem);
+    yield takeEvery("DEL_ONE_LIST_ITEM_REQUEST", fetchDeleteListItem);
 }
 
 export default sagas;

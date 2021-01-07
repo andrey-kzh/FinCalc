@@ -1,3 +1,4 @@
+const Lists = require('../model/Lists');
 const Categorys = require('../model/Categorys');
 const {mapCategorys} = require('../mappers/categorys');
 
@@ -9,7 +10,7 @@ module.exports.getCategorys = async function getCategorys(ctx, next) {
 
     try {
         const categorys = await Categorys.find({userId: ctx.request.query.userId})
-        ctx.body = {categories: categorys.map(mapCategorys)};
+        ctx.body = {categorys: categorys.map(mapCategorys)};
 
     } catch (err) {
         ctx.throw(400, err.message);
@@ -47,6 +48,17 @@ module.exports.updCategory = async function updCategory(ctx, next) {
         );
 
         ctx.body = {category: [category].map(mapCategorys)[0]};
+    } catch (err) {
+        ctx.throw(400, err.message);
+    }
+};
+
+module.exports.delCategory = async function delCategory(ctx, next) {
+
+    try {
+        const category = await Categorys.findByIdAndDelete(ctx.request.body.id);
+        await Lists.deleteMany({categoryId: category.id});
+        ctx.body = {category: [category].map(mapCategorys)[0]}
     } catch (err) {
         ctx.throw(400, err.message);
     }

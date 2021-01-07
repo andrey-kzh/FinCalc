@@ -29,6 +29,6 @@
 }
 
 .button_add-form {
-    width: 100px;
-    height: 30px;
+    width: 140px !important;
+    height: 40px !important;
 }

@@ -16,8 +16,13 @@ export default class Api {
         this.refreshTokens = this.refreshTokens.bind(this);
         this.getAuthDataBySession = this.getAuthDataBySession.bind(this);
         this.addCategoryRequest = this.addCategoryRequest.bind(this);
-        this.getAllCategorys = this.getAllCategorys.bind(this);
         this.updCategoryRequest = this.updCategoryRequest.bind(this);
+        this.delCategoryRequest = this.delCategoryRequest.bind(this);
+        this.getAllCategorys = this.getAllCategorys.bind(this);
+        this.getAllListsWithCategorys = this.getAllListsWithCategorys.bind(this);
+        this.addListItemRequest = this.addListItemRequest.bind(this);
+        this.updListItemRequest = this.updListItemRequest.bind(this);
+        this.delListItemRequest = this.delListItemRequest.bind(this);
     }
 
 
@@ -139,6 +144,60 @@ export default class Api {
     }
 
 
+    async updListItemRequest(listItem) {
+
+        const url = `/lists`;
+        const options = {
+            method: "PUT",
+            body: JSON.stringify(listItem),
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+
+    async delListItemRequest(listItem) {
+
+        const url = `/lists`;
+        const options = {
+            method: "DELETE",
+            body: JSON.stringify(listItem),
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+
+    async delCategoryRequest(category) {
+
+        const url = `/categorys`;
+        const options = {
+            method: "DELETE",
+            body: JSON.stringify(category),
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+
     async getAllCategorys(userId) {
 
         const url = `/categorys?userId=${userId}`;
@@ -154,5 +213,41 @@ export default class Api {
             console.log(e.message)
         }
     }
+
+
+    async getAllListsWithCategorys({userId, dateMin, dateMax}) {
+
+        const url = `/lists?userId=${userId}&dateMin=${dateMin}&dateMax=${dateMax}`;
+        const options = {
+            method: "GET",
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
+
+    async addListItemRequest(listItem) {
+
+        const url = `/lists`;
+        const options = {
+            method: "POST",
+            body: JSON.stringify(listItem),
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
 
 }

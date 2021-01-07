@@ -4,6 +4,11 @@
     align-items: flex-start;
     margin: 20px 0 0 0;
     font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.category-item:hover {
+    opacity: 0.5;
 }
 
 .category-item__txt {

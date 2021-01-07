@@ -1,2 +1,3 @@
-import CategorysItem from './component'
-export default CategorysItem
+import {ListItem} from './container'
+
+export default ListItem
