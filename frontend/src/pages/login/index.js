@@ -17,7 +17,9 @@ class LoginPage extends React.Component {
 
     render() {
         return (
+            <div className="login-form-wrap">
             <LoginForm/>
+            </div>
         );
     }
 }
@@ -36,7 +38,8 @@ class RedirectRoute extends React.PureComponent {
         return (
             <Route
                 render={() =>
-                    (!this.props.user.isLogin)
+                    //(!this.props.user.isLogin)
+                    (true)
                         ? (<LoginPage/>)
                         : (<Redirect
                             to={{

@@ -19,28 +19,36 @@ export default class LoginFormComponent extends React.PureComponent {
     }
 
     render() {
+
         return (
-            <form onSubmit={(e) => e.preventDefault()}>
+            <div>
+                {this.props.user.loginErrorMes &&
+                <div className="login-error-mes">{this.props.user.loginErrorMes}</div>}
 
-                <input value={this.state.login}
-                       onChange={(e) => this.handleChange(e, 'login')}
-                       placeholder="Логин"
-                       type="text"
-                       className={`add-form__sum`}/>
+                <form onSubmit={(e) => e.preventDefault()}>
 
-                <input value={this.state.pass}
-                       onChange={(e) => this.handleChange(e, 'pass')}
-                       placeholder="Пароль"
-                       type="password"
-                       className={`add-form__sum`}/>
+                    <input value={this.state.login}
+                           onChange={(e) => this.handleChange(e, 'login')}
+                           placeholder="Логин"
+                           type="text"
+                           className={`add-form__sum`}/>
 
-                <SubmitButton
-                    className={'button_add-form'}
-                    callback={() => this.props.loginRequest({login: this.state.login, pass: this.state.pass})}>
-                    Добавить
-                </SubmitButton>
+                    <input value={this.state.pass}
+                           onChange={(e) => this.handleChange(e, 'pass')}
+                           placeholder="Пароль"
+                           type="password"
+                           className={`add-form__sum`}/>
 
-            </form>
+                    <div className="login-form-submit-wrap">
+                        <SubmitButton
+                            className={'button_login-form'}
+                            callback={() => this.props.loginRequest({login: this.state.login, pass: this.state.pass})}>
+                            Войти
+                        </SubmitButton>
+                    </div>
+
+                </form>
+            </div>
         );
     }
 

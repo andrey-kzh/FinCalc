@@ -4,12 +4,7 @@ const Session = require('../model/Sessions');
 
 module.exports.login = async function login(ctx, next) {
 
-    if (!ctx.request.body.login) {
-        ctx.status = 400;
-        ctx.body = {error: {code: 'l01', mes: 'Empty login/password'}};
-        return;
-    }
-    if (!ctx.request.body.password) {
+    if (!ctx.request.body.login || !ctx.request.body.password) {
         ctx.status = 400;
         ctx.body = {error: {code: 'l01', mes: 'Empty login/password'}};
         return;

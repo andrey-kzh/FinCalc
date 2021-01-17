@@ -15,6 +15,11 @@ export function userReducer(prevState = initialState, action) {
                 isLogin: action.payload.isLogin,
             }
         }
+        case "LOGIN_ERROR_STORE": {
+            return {
+                loginErrorMes: action.payload.error.mes
+            }
+        }
     }
     return prevState
 }

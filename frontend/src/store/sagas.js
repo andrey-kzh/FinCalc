@@ -8,6 +8,7 @@ import {
     updOneCategoryInStoreAction,
     addCategoryInStoreAction,
     loginUserAction,
+    loginErrorAction,
     refreshTokensAction,
     authRequestAction,
     addListItemInStoreAction,
@@ -26,7 +27,7 @@ function* fetchLogin(action) {
             if (user.tokens) yield call(saveTokensToStorage, user.tokens);
             yield put(loginUserAction(user)) //вызываем редьюсер
         } else {
-            console.log(user.error)
+            yield put(loginErrorAction(user.error))
         }
     } catch (e) {
         console.log(e.message)
