@@ -52,6 +52,7 @@ export function dataReducer(prevState = initialState, action) {
         }
         case "ADD_NEW_CATEGORY_STORE": {
             let data = clone(prevState)
+            if (!data.entities.categorys) data.entities.categorys = {}
             data.entities.categorys[action.payload.category.id] = action.payload.category
             data.result.categorys.push(action.payload.category.id)
             return data
