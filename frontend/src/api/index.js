@@ -1,4 +1,7 @@
-import {getRefreshTokenFromStorage, getAccessTokenFromStorage} from '../utils/tokens'
+import {
+    getRefreshTokenFromStorage,
+    getAccessTokenFromStorage,
+} from '../utils/tokens'
 
 export default class Api {
 
@@ -12,6 +15,7 @@ export default class Api {
         this.getAccessTokenFromStorage = getAccessTokenFromStorage
 
         this.loginRequest = this.loginRequest.bind(this);
+        this.logoutRequest = this.logoutRequest.bind(this);
         this.requestWithAccessToken = this.requestWithAccessToken.bind(this);
         this.refreshTokens = this.refreshTokens.bind(this);
         this.getAuthDataBySession = this.getAuthDataBySession.bind(this);
@@ -86,6 +90,28 @@ export default class Api {
         }
 
     }
+
+
+    async logoutRequest() {
+        const url = `/auth/logout`;
+        const options = {
+            method: "POST",
+            body: JSON.stringify({refreshToken: this.getRefreshTokenFromStorage()}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        try {
+            const response = await this.requestWithAccessToken(url, options)
+            return response.json().then((data) => {
+                return data
+            })
+        } catch (e) {
+            console.log(e.message)
+        }
+
+    }
+
 
     async getAuthDataBySession() {
 

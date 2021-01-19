@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects'
 import Api from '../api'
-import {saveTokensToStorage} from '../utils/tokens'
+import {saveTokensToStorage, clearTokensFromStorage} from '../utils/tokens'
 import {normalizeLists, normalizeCategorys} from "../utils/normalize";
 
 import {
@@ -8,13 +8,14 @@ import {
     updOneCategoryInStoreAction,
     addCategoryInStoreAction,
     loginUserAction,
+    logoutUserAction,
     loginErrorAction,
     refreshTokensAction,
     authRequestAction,
     addListItemInStoreAction,
     delOneCategoryInStoreAction,
     updOneListItemInStoreAction,
-    delOneListItemInStoreAction
+    delOneListItemInStoreAction,
 } from '../store/actions'
 
 const api = new Api();
@@ -25,7 +26,7 @@ function* fetchLogin(action) {
         const user = yield call(api.loginRequest, action.payload);
         if (!user.error) {
             if (user.tokens) yield call(saveTokensToStorage, user.tokens);
-            yield put(loginUserAction(user)) //вызываем редьюсер
+            yield put(loginUserAction(user))
         } else {
             yield put(loginErrorAction(user.error))
         }
@@ -55,7 +56,17 @@ function* fetchAuth() {
 
 
 function* fetchLogout() {
-    console.log('123')
+    try {
+        const response = yield call(api.logoutRequest);
+        if (!response.error) {
+            yield call(clearTokensFromStorage)
+            yield put(logoutUserAction())
+        } else {
+            console.log(response.error)
+        }
+    } catch (e) {
+        console.log(e.message)
+    }
 }
 
 

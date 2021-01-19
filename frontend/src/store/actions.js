@@ -10,6 +10,12 @@ export const loginUserAction = (user) => {
     )
 }
 
+export const logoutUserAction = () => {
+    return (
+        {type: "LOGOUT_STORE", payload: {}}
+    )
+}
+
 export const loginErrorAction = (error) => {
     return (
         {type: "LOGIN_ERROR_STORE", payload: {error: error}}

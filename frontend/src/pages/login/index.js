@@ -38,8 +38,7 @@ class RedirectRoute extends React.PureComponent {
         return (
             <Route
                 render={() =>
-                    //(!this.props.user.isLogin)
-                    (true)
+                    (!this.props.user.isLogin)
                         ? (<LoginPage/>)
                         : (<Redirect
                             to={{
