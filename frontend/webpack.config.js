@@ -20,7 +20,7 @@ const isDev = (env !== 'production');
 const rootFolder = __dirname;
 const targetFolder = isDev ? "dist" : "prod";
 const modeVal = isDev ? 'development' : 'production';
-const devtoolVal = isDev ? 'source-map' : '';
+const devtoolVal = isDev ? 'source-map' : 'eval-nosources-cheap-source-map';
 
 //-------------------------------------------------
 

@@ -17,7 +17,7 @@ module.exports = function () {
                             options: {
                                 postcssOptions: {
                                     plugins: [
-                                        autoprefixer({browsers: ['ie >= 8', 'last 4 version']})
+                                        autoprefixer({overrideBrowserslist: ['ie >= 8', 'last 4 version']})
                                     ]
                                 },
                                 sourceMap: true
