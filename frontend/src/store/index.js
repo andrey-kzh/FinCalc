@@ -16,6 +16,7 @@ export const initialState = {
         id: null,
         name: null,
         isLogin: null,
+        loginErrorMes: null,
     },
     toggleCategory: 'expense',
     menu: [

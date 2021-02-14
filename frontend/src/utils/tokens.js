@@ -2,6 +2,10 @@ export function saveTokensToStorage(tokens) {
     localStorage.setItem('tokens', JSON.stringify(tokens));
 }
 
+export function clearTokensFromStorage() {
+    localStorage.removeItem('tokens');
+}
+
 export function getRefreshTokenFromStorage() {
     if (!localStorage.tokens) return null
     return JSON.parse(localStorage.tokens).refreshToken;

@@ -12,13 +12,16 @@ module.exports.registration = async function registration(ctx, next) {
         ctx.throw(400, 'Name not found');
     }
 
+    const login = ctx.request.body.login
+    const password = ctx.request.body.password
+    const name = ctx.request.body.name
+
     try {
-        const user = await Users.create({
-            login: ctx.request.body.login,
-            password: ctx.request.body.password,
-            name: ctx.request.body.name,
-        });
-        ctx.body = {user: user.id};
+        const user = new Users({name: name, login: login});
+        await user.setPassword(password);
+        await user.save();
+        ctx.status = 200;
+        ctx.body = {userId: user._id};
     } catch (err) {
         ctx.throw(400, err.message);
     }

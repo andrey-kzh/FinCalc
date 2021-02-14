@@ -1,0 +1,24 @@
+.button_login-form {
+    height: 30px;
+}
+
+@media screen and (max-width: 480px) {
+    .button_login-form {
+        height: 40px;
+    }
+}
+
+.login-form-submit-wrap {
+    text-align: right;
+}
+
+@media screen and (max-width: 480px) {
+    .login-form-submit-wrap {
+        text-align: center;
+    }
+}
+
+.login-error-mes {
+    padding: 0 0 5px 0;
+    color: #9f2410;
+}
