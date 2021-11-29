@@ -1,5 +1,8 @@
 const Koa = require('koa');
 const Router = require('koa-router');
+const serve = require('koa-static');
+const fs = require('fs');
+const path = require('path');
 const cors = require('@koa/cors');
 
 const {getCategorys, addCategory, updCategory, delCategory} = require('./controller/categorys');
@@ -35,6 +38,17 @@ router.put('/lists', mustBeAuthenticated, updLists);
 router.delete('/lists', mustBeAuthenticated, delLists);
 
 app.use(router.routes());
+
+app.use(serve('./public'));
+
+// this for HTML5 history in browser
+const index = fs.readFileSync(path.join(__dirname, 'public/index.html'));
+app.use(async (ctx, next) => {
+    if (!ctx.url.startsWith('/api')) {
+    ctx.set('content-type', 'text/html');
+    ctx.body = index;
+  }
+});
 
 module.exports = app;
 

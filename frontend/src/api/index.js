@@ -6,7 +6,7 @@ import {
 export default class Api {
 
     constructor() {
-        this.urlRoot = 'http://localhost:3000/api';
+        this.urlRoot = '/api';
         this.optionsDefault = {
             mode: "cors"
         };
@@ -37,10 +37,10 @@ export default class Api {
             let accessToken = this.getAccessTokenFromStorage();
 
             if (!options.headers) options.headers = {};
-            options.headers = {'Content-Type': 'application/json'};
+            options.headers = { 'Content-Type': 'application/json' };
             if (accessToken) options.headers.Authorization = `Bearer ${accessToken}`;
 
-            return await fetch(fullUrl, {...this.optionsDefault, ...options});
+            return await fetch(fullUrl, {...this.optionsDefault, ...options });
         } catch (e) {
             console.log(e.message)
         }
@@ -54,13 +54,13 @@ export default class Api {
             const fullUrl = `${this.urlRoot}/auth/refresh`;
             const options = {
                 method: "POST",
-                body: JSON.stringify({refreshToken: refreshToken}),
+                body: JSON.stringify({ refreshToken: refreshToken }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             };
 
-            const response = await fetch(fullUrl, {...this.optionsDefault, ...options});
+            const response = await fetch(fullUrl, {...this.optionsDefault, ...options });
             return response.json().then((data) => {
                 return data
             })
@@ -75,13 +75,13 @@ export default class Api {
         const fullUrl = `${this.urlRoot}/auth/login`;
         const options = {
             method: "POST",
-            body: JSON.stringify({login: data.login, password: data.pass}),
+            body: JSON.stringify({ login: data.login, password: data.pass }),
             headers: {
                 'Content-Type': 'application/json'
             }
         };
         try {
-            const response = await fetch(fullUrl, {...this.optionsDefault, ...options});
+            const response = await fetch(fullUrl, {...this.optionsDefault, ...options });
             return response.json().then((data) => {
                 return data
             })
@@ -96,7 +96,7 @@ export default class Api {
         const url = `/auth/logout`;
         const options = {
             method: "POST",
-            body: JSON.stringify({refreshToken: this.getRefreshTokenFromStorage()}),
+            body: JSON.stringify({ refreshToken: this.getRefreshTokenFromStorage() }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -241,7 +241,7 @@ export default class Api {
     }
 
 
-    async getAllListsWithCategorys({userId, dateMin, dateMax}) {
+    async getAllListsWithCategorys({ userId, dateMin, dateMax }) {
 
         const url = `/lists?userId=${userId}&dateMin=${dateMin}&dateMax=${dateMax}`;
         const options = {
