@@ -1,12 +1,14 @@
+const local = require('./local')
+
 module.exports = {
     mongodb: {
-        uri: 'mongodb://localhost/FinCalc',
+        uri: local.mongodb.uri,
         options: {
-            user: 'fCalc67',
-            pass: 'fIn60caLc629',
+            user: local.mongodb.user,
+            pass: local.mongodb.pass,
         }
     },
-    jwtSecretKey: 'jKie0S2j59lR5Hv30s3nhI84ka5br7',
+    jwtSecretKey: local.jwtSecretKey,
     crypto: {
         iterations: 12000,
         length: 128,
