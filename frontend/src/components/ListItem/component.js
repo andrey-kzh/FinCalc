@@ -4,6 +4,7 @@ import ModalWindow from "../ModalWindow";
 import CloseWindowButton from "../CloseWindowButton";
 import SubmitButton from "../SubmitButton";
 import ConfirmDeleteWindow from "../ConfirmDeleteWindow";
+import { formatDate } from '../../utils/formatListDate';
 
 export default class ListItemComponent extends React.PureComponent {
 
@@ -71,7 +72,7 @@ export default class ListItemComponent extends React.PureComponent {
         return [
             <div onClick={() => this.openEditWindow()} key={this.props.id} className={`category-item`}>
                 <div className={`category-item__txt`}>
-                    <div className={`category-item__date`}>20-01-2020</div>
+                    <div className={`category-item__date`}>{ formatDate(this.props.date) }</div>
                     <div className={`category-item__descr`}>{this.props.title}</div>
                 </div>
                 <div className={`category-item__sum`}>
