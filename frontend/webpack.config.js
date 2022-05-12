@@ -1,5 +1,5 @@
 const path = require("path");
-const {merge} = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 //плагины
 const CleanWebpackPlugin = require('./webpack/plugins/CleanWebpackPlugin');
@@ -15,21 +15,21 @@ const babelLoader = require('./webpack/modules/babelLoader');
 const cssLoader = require('./webpack/modules/cssLoader');
 
 //переменные
-const env = process.env.NODE_ENV;
-const isDev = (env !== 'production');
-const rootFolder = __dirname;
-const targetFolder = isDev ? "dist" : "prod";
+const build = process.env.BUILD_ENV;
+const isDev = (build !== 'production');
+const rootFolder = path.resolve(__dirname, '..');
+const targetFolder = isDev ? "frontend/dist" : "server/public";
+const backendHost = isDev ? 'http://localhost:3000' : '';
 const modeVal = isDev ? 'development' : 'production';
 const devtoolVal = isDev ? 'source-map' : 'eval-nosources-cheap-source-map';
 
 //-------------------------------------------------
 
 
-const common = merge([
-    {
+const common = merge([{
         mode: modeVal,
         devtool: devtoolVal, //source map только для разработки
-        entry: {main: path.resolve(rootFolder, 'src', 'index.js')},
+        entry: { main: path.resolve(rootFolder, 'frontend/src', 'index.js') },
         output: {
             filename: "[name].proj.js",
             chunkFilename: '[name].proj.js',
@@ -37,7 +37,7 @@ const common = merge([
             publicPath: '/' //for react router
         },
 
-//Общий код
+        //Общий код
         optimization: {
             runtimeChunk: true,
             splitChunks: {
@@ -55,12 +55,12 @@ const common = merge([
         }
 
     },
-//Общие модули и плагины
+    //Общие модули и плагины
     CopyWebpackPlugin(),
     babelLoader(),
     cssLoader(),
     CleanWebpackPlugin(),
-    DefinePlugin(isDev),
+    DefinePlugin(isDev, backendHost),
     HashedModuleIdsPlugin(),
     HtmlWebpackPlugin(),
     MiniCssExtractPlugin(),
@@ -82,11 +82,11 @@ const devServer = merge([{
 //-------------------------------------------------
 
 
-module.exports = function () {
+module.exports = function() {
 
-    console.log(env);
+    console.log(build);
 
-    switch (env) {
+    switch (build) {
 
         case 'development':
             return merge([

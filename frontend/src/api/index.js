@@ -6,8 +6,7 @@ import {
 export default class Api {
 
     constructor() {
-        this.urlRoot = '/api';
-        //this.urlRoot = 'http://localhost:3000/api';
+        this.urlRoot = `${process.env.BACKEND_HOST}/api`;
         this.optionsDefault = {
             mode: "cors"
         };

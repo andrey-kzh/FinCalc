@@ -1,7 +1,7 @@
-prod/
-dist/
-node_modules/
-local.js
+**/node_modules/
+**/dist/
 .idea/
+.vscode/
 .DS_*
+local.js
 .fuse_hidden*
