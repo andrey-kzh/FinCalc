@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"FinCalc.categorys"}],"uuid":"ecea4bc785a8452aa5a81bf57118ca0f"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"FinCalc.categorys"}],"uuid":"6d364725f95b495aa2922fb42a484875"}
