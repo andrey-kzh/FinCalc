@@ -1,8 +1,6 @@
 
 ## Personal Financial Accounting
 
-### [Demo](https://04.xpym-xpym.ru) 
-
 ---
 
 SCSS, PUG
